@@ -64,3 +64,6 @@ Thumbs.db
 
 # OS
 *.tmp
+
+# Archivos de documentación pesados no necesarios en repo por ahora
+*.pdf

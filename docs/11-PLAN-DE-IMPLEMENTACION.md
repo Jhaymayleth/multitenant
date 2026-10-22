@@ -95,13 +95,13 @@ Este es el punto de **entrega mínima defendible**.
 
 ---
 
-### Fase 4 — Producto visible
+### Fase 4 — Frontend: producto visible
 
 | Orden | Tarea |
 |---|---|
-| 4.1 | Página pública con SSG/ISR y datos del tenant por `slug` |
-| 4.2 | Panel del restaurante en CSR |
-| 4.3 | Reservas |
+| 4.1 | Página pública del restaurante con SSG/ISR y datos del tenant por subdominio |
+| 4.2 | Panel del CEO del restaurante en CSR |
+| 4.3 | Sitio de solicitud de Lixus en SSR/CSR |
 | 4.4 | Portal de Lixus para verificar y activar tenants |
 | 4.5 | Configuración visual de la página pública |
 

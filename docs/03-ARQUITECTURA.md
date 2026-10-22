@@ -1,21 +1,45 @@
 # 03 — Arquitectura del proyecto Lixus
 
-**Proyecto:** Lixus — Plataforma SaaS multitenant para restaurantes
-**Versión:** 0.2
-**Estado:** Diseño base para implementación; los puntos marcados como *PoC* deben validarse antes de cerrar el código
-**Decisiones aplicadas:** D-042 a D-046, D-052, D-061, D-065
+**Proyecto:** Lixus — Plataforma SaaS multitenant para restaurantes  
+**Versión:** 0.2  
+**Estado:** Diseño base para implementación; los puntos marcados como *PoC* deben validarse antes de cerrar el código  
+**Decisiones aplicadas:** D-042 a D-046, D-052, D-061, D-065, D-074, D-075, D-076  
 **Última actualización:** 22 de octubre de 2026
 
 ---
 
 ## 1. Vista general
 
-Lixus es un **monolito modular** con dos aplicaciones desplegables y servicios de apoyo:
+Lixus es un **monolito modular** con dos aplicaciones desplegables y servicios de apoyo.
+
+## 1.1 Mapa documental
+
+| Documento | Contenido | Cuándo leerlo |
+|---|---|---|
+| `00-INDICE.md` | Este índice: navegación, estado y convenciones. | Primero, siempre |
+| `01-REQUERIMIENTOS.md` | Requisitos académicos, funcionales, no funcionales, reglas y criterios de aceptación. | Antes de planificar o implementar |
+| `02-DECISIONES.md` | Registro D-001 a D-076 con estado, motivo y consecuencias. | Antes de proponer un cambio |
+| `03-ARQUITECTURA.md` | Componentes, multitenencia, resolución del tenant, migraciones, renderizado. | Antes de escribir código |
+| `04-MODULOS.md` | Módulos funcionales, permisos, endpoints y reglas de negocio. | Al implementar cada módulo |
+| `05-PENDIENTES.md` | Decisiones abiertas, contradicciones y riesgos con recomendación. | En cada reunión de avance |
+| `06-HISTORIAL.md` | Cómo evolucionó la documentación y qué decisiones cambiaron. | Para entender el porqué |
+| `07-MODELO-DATOS.md` | Tablas globales y por tenant, relaciones, índices y migraciones. | Al crear modelos y migraciones |
+| `08-SEGURIDAD-Y-ACCESO.md` | Autenticación, sesión, autorización, CSRF, QR anónimo, IA y pruebas. | Al implementar auth y permisos |
+| `09-ROBUSTEZ.md` | Idempotencia, rate limiting y concurrencia con pruebas. | Antes de la fase de robustez |
+| `10-ENTORNO-Y-DESPLIEGUE.md` | Docker Compose, variables, CI/CD, R2 y despliegue. | Al montar el entorno |
+| `11-PLAN-DE-IMPLEMENTACION.md` | Fases, orden de trabajo, definición de terminado y recortes. | Al planificar la semana |
+| `12-ENTREGABLES-Y-EVALUACION.md` | Rúbrica, README, guion de sustentación y preguntas. | Antes de la entrega |
+| `13-ROUTE-MVP.md` | Ruta de desarrollo orientada al enunciado y al cumplimiento del MVP. | Antes de arrancar la primera fase |
+
+---
+
+
 
 ```
 ┌──────────────────────────────────────────────────────────────────────┐
 │                        Navegador del usuario                         │
 │   Sitio público · Panel del restaurante · Portal de tenants (Lixus)  │
+│   Sitio de solicitud de nuevos tenants (Lixus)                       │
 └───────────────────────────────┬──────────────────────────────────────┘
                                 │ HTTPS + cookie httpOnly
 ┌───────────────────────────────▼──────────────────────────────────────┐
@@ -54,7 +78,19 @@ Lixus es un **monolito modular** con dos aplicaciones desplegables y servicios d
 
 ---
 
-## 2. Modelo multitenant
+## 2. Resolución del tenant desde el servidor
+
+El tenant nunca se decide desde el cliente. El backend siempre lo resuelve desde el contexto válido de la petición: subdominio, slug, sesión o token, según el caso.
+
+Esto quiere decir que:
+
+- la web pública del restaurante carga los datos correctos porque el backend se fija en el subdominio o en el contexto válido que llega;
+- el panel del CEO solo funciona si la sesión del usuario es del CEO de ese tenant;
+- la solicitud de nuevo tenant es solo la entrada al flujo de Lixus, no un tenant creado automáticamente.
+
+Esta regla es más importante que la forma del subdominio o de la ruta.
+
+## 3. Modelo multitenant
 
 ### 2.1 Dos tipos de schema
 
@@ -151,7 +187,7 @@ async with session.begin():
 | `lixus_migrator` | Migraciones y aprovisionamiento | Dueño de schemas; puede DDL |
 | `lixus_app` | API en ejecución | `USAGE` en schemas; DML sobre tablas; sin DDL; sin `BYPASSRLS` |
 
-La API nunca corre como superusuario ni como dueño de los schemas. Esto convierte un error de `search_path` en un error de permisos visible, no en una fuga silenciosa.
+La API never corre como superusuario ni como dueño de los schemas. Esto convierte un error de `search_path` en un error de permisos visible, no en una fuga silenciosa.
 
 ### 2.6 Migraciones multi-schema
 
@@ -168,36 +204,35 @@ La API nunca corre como superusuario ni como dueño de los schemas. Esto convier
 
 ## 3. Backend (FastAPI)
 
-### 3.1 Organización modular
+### 3.1 Organización por dominio
+
+El backend se organiza por dominio, con un paquete por responsabilidad principal:
 
 ```
 backend/
 ├── app/
-│   ├── core/            # configuración, seguridad, base de datos, errores
-│   ├── auth/            # login, tokens, cookies, verificación, recuperación
-│   ├── platform/        # tenants, verificación, planes, suscripciones, Lixus
-│   ├── access/          # membresías, roles, permisos
-│   ├── menu/            # categorías y productos
-│   ├── staff/           # perfiles de empleados
-│   ├── customers/       # clientes registrados del tenant
-│   ├── tables/          # mesas y sesiones QR
-│   ├── orders/          # pedidos y líneas
-│   ├── reservations/    # reservas
-│   ├── payments/        # estados de pago y comprobantes
-│   ├── public_site/     # configuración y datos de la página pública
-│   ├── ai/              # proveedores, prompts, herramientas, consumo
-│   ├── audit/           # eventos
-│   └── shared/          # utilidades, paginación, validaciones
+│   ├── core/                # configuración, seguridad, base de datos, errores
+│   ├── platform/            # tenants, membresías, planes, solicitudes, Lixus
+│   ├── auth/                # login, tokens, cookies, verificación, recuperación
+│   ├── menus/               # categorías y productos del menú
+│   ├── sites/               # configuración de la web pública del restaurante
+│   ├── orders/              # pedidos y líneas
+│   ├── reservations/        # reservas
+│   ├── payments/            # estados de pago y comprobantes
+│   ├── webhooks/            # eventos entrantes del proveedor de pago
+│   ├── public/              # datos públicos del tenant, si se separa
+│   ├── audit/               # eventos
+│   └── shared/              # utilidades, paginación, validaciones
 ├── migrations/
 │   ├── platform/
 │   └── tenant/
 └── tests/
     ├── unit/
     ├── integration/
-    └── security/        # aislamiento, IDOR, autorización
+    └── security/            # aislamiento, IDOR, autorización
 ```
 
-Cada módulo expone `router.py`, `service.py`, `repository.py`, `schemas.py` y `models.py`. Las reglas de negocio viven en `service.py`, no en el router ni en el ORM.
+Cada dominio expone sus responsabilidades y se integra desde el router principal cuando está listo. Las reglas de negocio viven en la capa de servicio del dominio, no en el router ni en el ORM.
 
 ### 3.2 Capas y responsabilidades
 
@@ -206,74 +241,22 @@ Cada módulo expone `router.py`, `service.py`, `repository.py`, `schemas.py` y `
 | Router | Valida entrada HTTP, aplica dependencias, devuelve códigos | Reglas de negocio |
 | Service | Orquesta reglas, transacciones, permisos de negocio | SQL directo |
 | Repository | Consultas y persistencia | Decidir permisos |
-| Modelos | Estructura de datos | Lógica de negocio |
+| Modelos | Estructura de datos | Lógica de negocio |### 3.3 Subdominios y rutas
 
-### 3.3 Validación y errores
+- **Web pública del restaurante:** subdominio por restaurante como `restaurante1.tudominio.com`.
+- **Panel del CEO:** ruta privada dentro del mismo subdominio, como `restaurante1.tudominio.com/app` o `restaurante1.tudominio.com/admin`.
+- **Sitio de solicitud de Lixus:** sitio separado como `solicita.tudominio.com`.
+- **Panel de Lixus:** área privada de Lixus, separada conceptualmente del resto.
 
-- Pydantic v2 para validar cuerpos, query y path.
-- Formato de error uniforme: `{"error": {"code", "message", "details"}}`.
-- Códigos: 400 validación, 401 sin sesión, 403 sin permiso, 404 no existe **o no pertenece al tenant**, 409 conflicto, 422 regla de negocio, 429 límite, 500 error interno.
-- Los 404 de recursos ajenos no revelan su existencia.
+### 3.4 Resolución del tenant en el frontend
 
-### 3.4 Auditoría
+El frontend no decide el tenant. El tenant se resuelve desde la petición que llega al backend: por subdominio, por slug, por sesión o por token, según el caso. Lo que el frontend envía es solo entrada; lo que importa es lo que el backend verifica.
 
-Eventos mínimos: `tenant.created`, `tenant.activated`, `tenant.verification_rejected`, `membership.created`, `membership.role_changed`, `membership.revoked`, `auth.login_failed`, `auth.login_succeeded`, `auth.password_reset`, `table_session.opened`, `table_session.closed`, `order.created`, `order.status_changed`, `payment.registered`, `plan.changed`, `ai.tool_invoked`, `lixus.data_accessed`.
+La web pública del restaurante carga los datos correctos porque el backend se fija en el subdominio o en el contexto válido que llega.
 
----
+El panel del CEO solo funciona si la sesión del usuario es del CEO de ese tenant.
 
-## 4. Frontend (Next.js)
-
-### 4.1 Áreas
-
-| Ruta | Área | Audiencia | Render |
-|---|---|---|---|
-| `/` | Landing de Lixus | Público | SSG |
-| `/r/[slug]` | Página pública del restaurante | Público | SSG + ISR |
-| `/r/[slug]/menu` | Menú público | Público | SSG + ISR |
-| `/r/[slug]/reserva` | Reserva pública (requiere cuenta) | Cliente registrado | CSR |
-| `/r/[slug]/cuenta` | Reservas y domicilios del cliente | Cliente registrado | CSR |
-| `/t/[token]` | Sesión anónima de mesa (QR) | Cliente anónimo | CSR |
-| `/app/*` | Panel del restaurante | Personal | CSR |
-| `/lixus/*` | Portal de plataforma | Lixus | CSR |
-| `/login`, `/registro` | Autenticación | Todos | CSR |
-
-### 4.2 Estrategias de renderizado (D-065 / RAC-09)
-
-| Estrategia | Dónde | Por qué |
-|---|---|---|
-| **SSG + ISR** | Página pública y menú | Contenido cambia poco, debe indexarse y cargar rápido; revalidación por tiempo o bajo demanda al publicar cambios. |
-| **CSR** | Panel, portal de Lixus, sesión QR, reservas | Datos privados, dependen de la sesión y cambian en tiempo real; no necesitan SEO. |
-
-**Justificación para la sustentación:** las páginas públicas se benefician de HTML pre-renderizado (SEO, primera pintura, tráfico sin sesión), mientras que los paneles privados no deben cachearse ni indexarse y requieren datos frescos por usuario.
-
-**Advertencia:** la modalidad académica debe declararse (P-01). Con un backend FastAPI independiente, el proyecto no es "Next.js fullstack" en sentido estricto; si se declara Opción A, el frontend debe poder explicarse como React con CSR, y el uso de SSG/ISR se presenta como valor agregado.
-
-### 4.3 Comunicación con la API
-
-- `fetch` con `credentials: 'include'`; la cookie viaja en la misma eTLD+1.
-- Si frontend y API quedan en dominios distintos, se usa un proxy/BFF en Next.js para evitar problemas de cookie de terceros.
-- En SSR/ISR, el servidor de Next.js consume los endpoints **públicos** sin credenciales; para datos privados se usa la cookie del usuario, no un token de servicio.
-- Nunca se expone una clave de API ni un token interno al navegador.
-
-### 4.4 Rutas protegidas
-
-- Backend: dependencia de sesión + membresía + permiso.
-- Frontend: el layout privado verifica sesión y redirige; **es solo experiencia de usuario**, no seguridad.
-- El menú del panel se construye según permisos devueltos por la API, pero cada endpoint revalida.
-
----
-
-## 5. Datos y archivos
-
-- PostgreSQL 16, `citext` para correos, `pgcrypto` para `gen_random_uuid`, `btree_gist` para solapamientos de reservas.
-- Dinero en enteros (`*_cents`) y moneda del tenant (ISO 4217).
-- Fechas en `timestamptz`; zona horaria del restaurante en su configuración.
-- Configuración visual y capacidades de plan en `jsonb` con validación de esquema en la aplicación.
-- Archivos en R2 con bucket privado, nombre UUID, tipo validado por magic bytes, tamaño máximo configurable y URL firmada de corta duración.
-
----
-
-## 6. Seguridad de la arquitectura
+### 3.5 Seguridad de la arquitectura
 
 | Riesgo | Control |
 |---|---|
@@ -291,25 +274,47 @@ Eventos mínimos: `tenant.created`, `tenant.activated`, `tenant.verification_rej
 
 Detalle en `08-SEGURIDAD-Y-ACCESO.md` y `09-ROBUSTEZ.md`.
 
+
+## 4. Fronteras entre las tres caras del proyecto
+
+### 4.1 Web pública del restaurante
+
+- Subdominio del restaurante.
+- Datos del tenant visibles.
+- Sin login obligatorio.
+- Plantilla común, datos distintos por tenant.
+
+### 4.2 Panel del CEO del restaurante
+
+- Ruta privada dentro del mismo subdominio.
+- Sesión y permisos.
+- Solo el CEO del tenant.
+- Lo que el CEO administra del restaurante.
+
+### 4.3 Sitio y panel de Lixus
+
+- Sitio separado para la solicitud.
+- Panel privado para la gestión del SaaS.
+- Lixus controla:
+  - solicitudes
+  - tenants
+  - membresías
+  - pagos de membresía
+  - creación de tenant
+  - contraseña inicial
+  - notificaciones al futuro CEO
+
 ---
 
-## 7. Entornos
-
-| Entorno | Base de datos | Archivos | Objetivo |
-|---|---|---|---|
-| Local | PostgreSQL y Redis en Docker | R2 real o MinIO local | Desarrollo y pruebas |
-| CI | Servicios de PostgreSQL y Redis en el runner | No aplica | Lint, tests, build |
-| Producción | Gestionada o contenedor con respaldo | R2 | Operación real (pendiente P-14) |
-
----
-
-## 8. Decisiones de arquitectura todavía abiertas
+## 5. Decisiones de arquitectura todavía abiertas
 
 | Tema | Estado | Documento |
 |---|---|---|
 | Modalidad académica A/B | Por confirmar con el docente | `05-PENDIENTES.md` P-01 |
 | Caja ligera y comprobantes | Definido (D-070) | — |
-| URL pública: subdominio o ruta | Por decidir | P-06 |
+| URL pública: subdominio o ruta | Definido: subdominio público | — |
+| Panel del CEO: ruta privada | Definido | — |
+| Sitio de solicitud de Lixus | Definido: sitio separado | — |
 | Reservas: tolerancia y no-show | Por definir | P-07 |
 | Domicilios: cobertura, costo y entrega | Por definir | P-23 |
 | Proveedor de correo | Por definir | P-11 |
@@ -318,7 +323,7 @@ Detalle en `08-SEGURIDAD-Y-ACCESO.md` y `09-ROBUSTEZ.md`.
 
 ---
 
-## 9. Pruebas de arquitectura obligatorias (PoC)
+## 6. Pruebas de arquitectura obligatorias (PoC)
 
 Antes de construir módulos funcionales:
 

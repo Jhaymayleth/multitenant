@@ -77,7 +77,8 @@ La documentación separa lo obligatorio de lo deseable para que el equipo no con
 | Seguridad | Diseñado, pendiente de implementar |
 | Robustez | Diseñada, pendiente de implementar |
 | Infraestructura | Local definida; producción pendiente |
-| Código | No iniciado |
+| Código | Estructura por dominio/característica preparada; carpetas backend/ por dominio y frontend/ por áreas |
+| Decisiones cerradas | D-074, D-075 y D-076 añadidas a `02-DECISIONES.md` y al índice |
 | Ruta del MVP | Definida en `13-ROUTE-MVP.md` |
 
 **Resumen numérico:** 73 decisiones registradas, 19 pendientes abiertos de 24 registrados (P-02, P-03, P-08, P-18 y P-24 resueltos), 8 riesgos técnicos y 5 contradicciones documentadas (2 resueltas).
@@ -103,6 +104,7 @@ La documentación separa lo obligatorio de lo deseable para que el equipo no con
 | Freebuff | Descartado como proveedor de inferencia (D-056) |
 | Almacenamiento | Cloudflare R2 (D-059) |
 | Robustez | Idempotencia y rate limiting obligatorios (D-062, D-063) |
+| Arquitectura final | Backend y frontend únicos; tres caras de producto; sitio aparte para captación (D-074, D-075, D-076) |
 
 ---
 

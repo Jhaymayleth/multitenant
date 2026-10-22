@@ -1,40 +1,32 @@
 # -----------------------------------------------------------------------------
-# Lixus — entorno local mínimo
+# Lixus — Entorno Local Multitenant
 # -----------------------------------------------------------------------------
-# Servicios iniciales:
-#   - postgres
-#   - redis
-#   - backend (FastAPI)
-#   - frontend (Next.js)
+# Servicios:
+#   - postgres (PostgreSQL 16 con extensiones y schema platform)
+#   - redis (Redis 7 para rate limit y caché)
+#   - backend (FastAPI + Python 3.12)
+#   - frontend (Next.js 15 + React 19)
 #
-# Este compose es el punto de partida. Los servicios exactos de frontend y
-# backend se ajustan según la estructura real del monorepo/polyrepo que se
-# defina en la fase 1.1.
+# Para levantar el entorno:
+#   docker compose up --build
 # -----------------------------------------------------------------------------
-
-version: "3.9"
-
-x-shared-env: &shared-env
-  env_file:
-    - .env
 
 services:
   postgres:
     image: postgres:16-alpine
     container_name: lixus-postgres
     restart: unless-stopped
-    env_file:
-      - .env
     environment:
-      POSTGRES_USER: ${DB_USER:lixus}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:changeme_local}
-      POSTGRES_DB: ${DB_NAME:platform}
+      POSTGRES_USER: ${DB_USER:-lixus}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme_local}
+      POSTGRES_DB: ${DB_NAME:-platform}
     ports:
-      - "5432:5432"
+      - "${DB_HOST_PORT:-5433}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./infra/docker/postgres/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:lixus} -d ${DB_NAME:platform}"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-lixus} -d ${DB_NAME:-platform}"]
       interval: 5s
       timeout: 3s
       retries: 5
@@ -45,6 +37,8 @@ services:
     restart: unless-stopped
     ports:
       - "6379:6379"
+    volumes:
+      - redis_data:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
@@ -52,54 +46,55 @@ services:
       retries: 5
 
   backend:
-    image: python:3.12-slim
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     container_name: lixus-backend
     restart: unless-stopped
-    env_file:
-      - .env
     working_dir: /app
     volumes:
       - ./backend:/app
     ports:
       - "8000:8000"
+    environment:
+      APP_ENV: ${APP_ENV:-local}
+      APP_HOST: "0.0.0.0"
+      APP_PORT: 8000
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: ${DB_USER:-lixus}
+      DB_PASSWORD: ${DB_PASSWORD:-changeme_local}
+      DB_NAME: ${DB_NAME:-platform}
+      REDIS_URL: redis://redis:6379/0
+      JWT_SECRET: ${JWT_SECRET:-changeme_jwt_secret_do_not_use_in_prod}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+      API_BASE_URL: ${API_BASE_URL:-http://localhost:8000}
     depends_on:
       postgres:
         condition: service_healthy
       redis:
         condition: service_healthy
-    command: >
-      sh -c "
-        pip install --no-cache-dir -r requirements.txt &&
-        uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-      "
-    profiles:
-      - dev
 
   frontend:
-    image: node:20-alpine
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     container_name: lixus-frontend
     restart: unless-stopped
-    env_file:
-      - .env
     working_dir: /app
     volumes:
       - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
     ports:
       - "3000:3000"
     environment:
-      # Next necesita saber la URL base pública en dev.
-      # En local usamos la variable genérica; la derivamos en el compose si es necesario.
       NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000/api/v1}
     depends_on:
       backend:
         condition: service_started
-    command: >
-      sh -c "
-        npm install &&
-        npm run dev -- -p 3000
-      "
-    profiles:
-      - dev
 
 volumes:
   postgres_data:
+  redis_data:

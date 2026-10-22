@@ -1,9 +1,10 @@
-# 00 — Índice maestro de documentación
-
-**Proyecto:** Lixus — Plataforma SaaS multitenant para restaurantes  
-**Versión de la documentación:** 0.2  
-**Estado:** Línea base para iniciar el desarrollo  
-**Última actualización:** 22 de octubre de 2026  
+# 00 — Índice maestro de documentación**Proyecto:** Lixus — Plataforma SaaS multitenant para restaurantes
+**Versión de la documentación:** 0.2
+**Estado:** Línea base para iniciar el desarrollo
+**Última actualización:** 22 de octubre de 2026
+**Repositorio:** https://github.com/Jhaymayleth/multitenant.git
+**Ramificación base:** main / develop
+**Autor del repo:** Jhaymayeth <josemrn2006@gmail.com>  
 
 ---
 

@@ -3,17 +3,16 @@ import os
 import sys
 from logging.config import fileConfig
 
-from sqlalchemy import MetaData, engine_from_config, pool
-
 from alembic import context
+from sqlalchemy import MetaData, engine_from_config, pool
 
 # Asegurar que el paquete app sea importable
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
+import app.audit.models  # noqa: F401
+import app.platform.models  # noqa: F401  (registra modelos en Base.metadata)
 from app.core.config import Settings
 from app.core.database import Base
-import app.platform.models  # noqa: F401  (registra modelos en Base.metadata)
-import app.audit.models  # noqa: F401
 
 settings = Settings()
 

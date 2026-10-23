@@ -3,21 +3,20 @@ import os
 import sys
 from logging.config import fileConfig
 
-from sqlalchemy import MetaData, engine_from_config, pool, text
-
 from alembic import context
+from sqlalchemy import MetaData, engine_from_config, pool, text
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
-from app.core.config import Settings
-from app.core.database import Base
 import app.menus.models  # noqa: F401
-import app.tables.models  # noqa: F401
 import app.orders.models  # noqa: F401
-import app.reservations.models  # noqa: F401
 import app.payments.models  # noqa: F401
+import app.reservations.models  # noqa: F401
 import app.sites.models  # noqa: F401
 import app.staff.models  # noqa: F401
+import app.tables.models  # noqa: F401
+from app.core.config import Settings
+from app.core.database import Base
 
 settings = Settings()
 

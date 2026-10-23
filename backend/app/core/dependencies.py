@@ -93,25 +93,60 @@ async def get_tenant_context(
             detail="El usuario no tiene un restaurante activo seleccionado",
         )
 
-    # El schema_name se resuelve en base de datos o se deriva del tenant_id
-    # En producción / BD se lee de platform.tenants.schema_name
-    # Para la estructura base validamos el patrón de seguridad:
-    schema_name = getattr(user, "schema_name", None) or f"tenant_{user.tenant_id[:12]}"
+    import uuid as _uuid
 
+    from sqlalchemy import select
+
+    from app.platform.models import Tenant, TenantMembership
+
+    try:
+        user_uuid = _uuid.UUID(user.id)
+        tenant_uuid = _uuid.UUID(user.tenant_id)
+    except (ValueError, AttributeError):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Identificador de usuario o tenant inválido",
+        )
+
+    # Resolver el tenant y la membresía activa desde la base de datos (autoritativo)
+    tenant = db.execute(
+        select(Tenant).where(Tenant.id == tenant_uuid, Tenant.status == "active")
+    ).scalar_one_or_none()
+    if not tenant:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Restaurante no encontrado o inactivo",
+        )
+
+    membership = db.execute(
+        select(TenantMembership).where(
+            TenantMembership.tenant_id == tenant.id,
+            TenantMembership.user_id == user_uuid,
+            TenantMembership.status == "active",
+        )
+    ).scalar_one_or_none()
+    if not membership:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="El usuario no tiene una membresía activa en este restaurante",
+        )
+
+    schema_name = tenant.schema_name
     if not SAFE_SCHEMA_REGEX.match(schema_name):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Identificador de schema de tenant inválido",
         )
 
-    # Configurar el search_path local a la transacción
+    # Configurar el search_path local a la transacción y recordarlo para transacciones futuras
+    db.info["tenant_schema"] = schema_name
     set_tenant_schema(db, schema_name)
 
     return TenantContext(
-        tenant_id=user.tenant_id,
+        tenant_id=str(tenant.id),
         schema_name=schema_name,
-        role=user.role,
-        user_id=user.id,
+        role=membership.role,
+        user_id=str(user_uuid),
     )
 
 

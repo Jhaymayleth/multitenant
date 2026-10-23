@@ -12,7 +12,6 @@ from app.core.database import SessionLocal
 from app.core.security import hash_password
 from app.platform.models import TenantMembership, User
 
-
 PASSWORD = "devpass123"
 
 

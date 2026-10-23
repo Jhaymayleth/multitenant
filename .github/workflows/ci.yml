@@ -18,8 +18,6 @@ jobs:
           POSTGRES_DB: platform
         ports:
           - 5433:5432
-        volumes:
-          - ${{ github.workspace }}/infra/docker/postgres/init:/docker-entrypoint-initdb.d:ro
         options: >-
           --health-cmd "pg_isready -U lixus -d platform"
           --health-interval 10s
@@ -58,6 +56,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Initialize database (schema, roles, extensions)
+        run: psql -h localhost -p 5433 -U lixus -d platform -v ON_ERROR_STOP=1 -f ../infra/docker/postgres/init/01-init.sql
+        env:
+          PGPASSWORD: changeme_local
+
+      - name: Apply platform migrations
+        run: alembic -c migrations/platform/alembic.ini upgrade head
+
       - name: Lint (ruff)
         run: ruff check .
 
@@ -86,3 +92,12 @@ jobs:
 
       - name: Build
         run: npm run build
+
+  docker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker images
+        run: docker compose build

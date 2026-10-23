@@ -7,7 +7,8 @@ Basado en:
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
+
 from sqlalchemy import Boolean, CheckConstraint, Column, DateTime, String, Text
 from sqlalchemy.dialects.postgresql import JSONB
 
@@ -15,7 +16,7 @@ from app.core.database import Base
 
 
 def utc_now() -> datetime:
-    return datetime.now(timezone.utc)
+    return datetime.now(UTC)
 
 
 class TenantSettings(Base):

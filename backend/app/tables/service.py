@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 import secrets
-import uuid
+
 from sqlalchemy.orm import Session
 
-from app.tables.models import RestaurantTable, TableSession
+from app.tables.models import RestaurantTable
 from app.tables.repository import TableRepository
 from app.tables.schemas import TableCreate
 

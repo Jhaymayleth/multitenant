@@ -6,6 +6,7 @@ Redis, JWT, archivos, rate limiting, webhooks de pago, etc.
 """
 
 from typing import Any
+
 from pydantic import field_validator
 from pydantic_settings import BaseSettings
 

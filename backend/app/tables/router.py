@@ -2,14 +2,12 @@
 
 from __future__ import annotations
 
-import uuid
-from typing import Sequence
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
 from app.core.dependencies import TenantContext, get_tenant_context, require_role
-from app.tables.schemas import TableCreate, TableResponse, TableSessionResponse
+from app.tables.schemas import TableCreate, TableResponse
 from app.tables.service import TableService
 
 router = APIRouter(prefix="/tenant/tables", tags=["Tenant Tables & QR"])

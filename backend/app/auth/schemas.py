@@ -6,6 +6,7 @@ Basado en docs/04-MODULOS.md (Sección 4).
 from __future__ import annotations
 
 import uuid
+
 from pydantic import BaseModel, EmailStr, Field
 
 

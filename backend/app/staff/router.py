@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 import uuid
-from typing import Sequence
+
 from fastapi import APIRouter, Depends, status
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
-from app.core.dependencies import TenantContext, get_tenant_context, require_role
+from app.core.dependencies import TenantContext, require_role
 from app.staff.models import StaffProfile
 from app.staff.schemas import StaffCreateRequest, StaffProfileResponse
 

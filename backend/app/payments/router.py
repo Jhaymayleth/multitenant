@@ -3,12 +3,13 @@
 from __future__ import annotations
 
 import uuid
+
 from fastapi import APIRouter, Depends, Header, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
-from app.core.dependencies import TenantContext, get_tenant_context, require_role
-from app.payments.schemas import PaymentCreate, PaymentResponse, ReceiptResponse
+from app.core.dependencies import TenantContext, require_role
+from app.payments.schemas import PaymentCreate, PaymentResponse
 from app.payments.service import PaymentService
 
 router = APIRouter(prefix="/tenant/payments", tags=["Tenant Payments & Receipts"])

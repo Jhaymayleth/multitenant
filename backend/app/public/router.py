@@ -12,21 +12,18 @@ No expone datos internos del SaaS ni de otros restaurantes.
 
 from __future__ import annotations
 
-import uuid
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db, set_tenant_schema
-from app.menus.models import MenuCategory, MenuProduct
-from app.menus.schemas import CategoryResponse, ProductResponse
-from app.payments.models import Receipt
+from app.menus.models import MenuProduct
+from app.menus.schemas import ProductResponse
 from app.payments.schemas import ReceiptResponse
 from app.platform.models import Tenant
 from app.sites.models import TenantSettings
 from app.sites.schemas import SiteSettingsResponse
-from app.tables.models import RestaurantTable, TableSession
-from app.tables.schemas import ServiceRequestCreate, ServiceRequestResponse
+from app.tables.schemas import ServiceRequestCreate
 
 router = APIRouter(prefix="/public", tags=["Public Client Endpoints"])
 

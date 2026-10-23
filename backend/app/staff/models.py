@@ -6,7 +6,8 @@ Basado en docs/07-MODELO-DATOS.md (Sección 3.2: staff_profiles).
 from __future__ import annotations
 
 import uuid
-from datetime import date, datetime, timezone
+from datetime import UTC, datetime
+
 from sqlalchemy import CheckConstraint, Column, Date, DateTime, String
 from sqlalchemy.dialects.postgresql import UUID
 
@@ -14,7 +15,7 @@ from app.core.database import Base
 
 
 def utc_now() -> datetime:
-    return datetime.now(timezone.utc)
+    return datetime.now(UTC)
 
 
 class StaffProfile(Base):

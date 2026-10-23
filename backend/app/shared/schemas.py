@@ -6,7 +6,8 @@ Basado en docs/04-MODULOS.md y docs/09-ROBUSTEZ.md.
 from __future__ import annotations
 
 from typing import Generic, TypeVar
-from pydantic import BaseModel, Field
+
+from pydantic import BaseModel
 
 T = TypeVar("T")
 

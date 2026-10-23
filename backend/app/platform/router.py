@@ -6,12 +6,17 @@ Basado en docs/04-MODULOS.md (Sección 3).
 from __future__ import annotations
 
 import uuid
-from typing import Sequence
+
 from fastapi import APIRouter, Depends, Header, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
-from app.platform.schemas import PlanResponse, TenantCreateRequest, TenantResponse, TenantVerifyRequest
+from app.platform.schemas import (
+    PlanResponse,
+    TenantCreateRequest,
+    TenantResponse,
+    TenantVerifyRequest,
+)
 from app.platform.service import PlatformService
 
 router = APIRouter(prefix="/platform", tags=["Platform (Lixus)"])

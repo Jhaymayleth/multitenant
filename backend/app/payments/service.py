@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-import secrets
-import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
+
 from sqlalchemy.orm import Session
 
-from app.payments.models import Payment, Receipt
+from app.payments.models import Payment
 from app.payments.repository import PaymentRepository
 from app.payments.schemas import PaymentCreate
 
@@ -24,7 +23,7 @@ class PaymentService:
             amount_cents=data.amount_cents,
             method=data.method,
             status="pending" if data.method == "online_sandbox" else "paid",
-            paid_at=datetime.now(timezone.utc) if data.method != "online_sandbox" else None,
+            paid_at=datetime.now(UTC) if data.method != "online_sandbox" else None,
         )
         self.db.add(payment)
         self.db.commit()

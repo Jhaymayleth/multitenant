@@ -13,7 +13,8 @@ asegurando que el cambio de schema no contamine las conexiones reutilizadas en e
 from __future__ import annotations
 
 import re
-from typing import Generator
+from collections.abc import Generator
+
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
@@ -38,7 +39,6 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 class Base(DeclarativeBase):
     """Base declarativa para todos los modelos ORM de SQLAlchemy."""
-    pass
 
 
 def set_tenant_schema(session: Session, schema_name: str) -> None:

@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 import uuid
-from typing import Sequence
+from collections.abc import Sequence
+
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.platform.models import Plan, Tenant, TenantMembership, User
+from app.platform.models import Plan, Tenant
 
 
 class PlatformRepository:

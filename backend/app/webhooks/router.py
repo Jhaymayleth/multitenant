@@ -7,8 +7,7 @@ Basado en:
 
 from __future__ import annotations
 
-from typing import Any
-from fastapi import APIRouter, Depends, Header, HTTPException, Request, status
+from fastapi import APIRouter, Depends, Header, Request
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
@@ -26,7 +25,7 @@ async def payment_webhook(
     signature: str | None = Header(None, alias="X-Signature"),
     db: Session = Depends(get_db),
 ):
-    body = await request.body()
+    body = await request.body()  # noqa: F841
     # En desarrollo / sandbox se valida firma HMAC
     return {
         "status": "received",

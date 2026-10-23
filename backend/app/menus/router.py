@@ -7,7 +7,7 @@ Requiere contexto de tenant resuelto por el servidor.
 from __future__ import annotations
 
 import uuid
-from typing import Sequence
+
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 

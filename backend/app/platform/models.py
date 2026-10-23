@@ -8,7 +8,8 @@ tenants, membresías, planes, suscripciones, verificaciones y claves de idempote
 from __future__ import annotations
 
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
+
 from sqlalchemy import (
     Boolean,
     CheckConstraint,
@@ -28,7 +29,7 @@ from app.core.database import Base
 
 
 def utc_now() -> datetime:
-    return datetime.now(timezone.utc)
+    return datetime.now(UTC)
 
 
 class User(Base):

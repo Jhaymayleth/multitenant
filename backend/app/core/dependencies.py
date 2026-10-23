@@ -7,8 +7,10 @@ Basado en:
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Annotated, Callable
+from typing import Annotated
+
 from fastapi import Cookie, Depends, Header, HTTPException, Request, status
 from sqlalchemy.orm import Session
 

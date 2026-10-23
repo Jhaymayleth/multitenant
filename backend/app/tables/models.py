@@ -6,8 +6,17 @@ Basado en docs/07-MODELO-DATOS.md (Sección 3: Mesas y atención).
 from __future__ import annotations
 
 import uuid
-from datetime import datetime, timezone
-from sqlalchemy import Boolean, CheckConstraint, Column, DateTime, ForeignKey, SmallInteger, String, Text
+from datetime import UTC, datetime
+
+from sqlalchemy import (
+    Boolean,
+    CheckConstraint,
+    Column,
+    DateTime,
+    ForeignKey,
+    SmallInteger,
+    String,
+)
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 
@@ -15,7 +24,7 @@ from app.core.database import Base
 
 
 def utc_now() -> datetime:
-    return datetime.now(timezone.utc)
+    return datetime.now(UTC)
 
 
 class RestaurantTable(Base):

@@ -5,8 +5,8 @@ Basado en docs/07-MODELO-DATOS.md (Sección 2.11).
 
 from __future__ import annotations
 
-import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
+
 from sqlalchemy import BigInteger, CheckConstraint, Column, DateTime, String, Text
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 
@@ -14,7 +14,7 @@ from app.core.database import Base
 
 
 def utc_now() -> datetime:
-    return datetime.now(timezone.utc)
+    return datetime.now(UTC)
 
 
 class AuditLog(Base):

@@ -15,7 +15,7 @@ from __future__ import annotations
 import re
 from collections.abc import Generator
 
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, event, text
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
 from app.core.config import Settings
@@ -35,6 +35,25 @@ engine = create_engine(
 )
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+
+@event.listens_for(Session, "after_begin")
+def _apply_tenant_search_path(session: Session, transaction, connection) -> None:
+    """Reaplica el search_path del tenant en cada nueva transacción.
+
+    SET LOCAL solo dura la transacción; este listener garantiza que commits
+    intermedios (refresh, etc.) no pierdan el aislamiento del tenant.
+    """
+    schema_name = session.info.get("tenant_schema")
+    if not schema_name:
+        return
+    if not SAFE_SCHEMA_REGEX.match(schema_name):
+        raise ValueError(f"Nombre de schema de tenant inválido: {schema_name}")
+    search_path = f'"{schema_name}", platform, public'
+    connection.execute(
+        text("SELECT set_config('search_path', :sp, true)"),
+        {"sp": search_path},
+    )
 
 
 class Base(DeclarativeBase):

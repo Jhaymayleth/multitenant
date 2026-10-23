@@ -7,7 +7,7 @@ from sqlalchemy import MetaData, engine_from_config, pool, text
 
 from alembic import context
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..")))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
 from app.core.config import Settings
 from app.core.database import Base
@@ -64,13 +64,13 @@ def run_migrations_online() -> None:
         poolclass=pool.NullPool,
     )
     with connectable.connect() as connection:
-        connection.execute(text(f'SET search_path TO "{schema}"'))
         context.configure(
             connection=connection,
             target_metadata=target_metadata,
             version_table_schema=schema,
         )
         with context.begin_transaction():
+            connection.execute(text(f'SET search_path TO "{schema}"'))
             context.run_migrations()
 
 

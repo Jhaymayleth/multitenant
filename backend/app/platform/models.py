@@ -52,7 +52,7 @@ class User(Base):
     created_at = Column(DateTime(timezone=True), default=utc_now, nullable=False)
     updated_at = Column(DateTime(timezone=True), default=utc_now, onupdate=utc_now, nullable=False)
 
-    memberships = relationship("TenantMembership", back_populates="user", cascade="all, delete-orphan")
+    memberships = relationship("TenantMembership", back_populates="user", foreign_keys="TenantMembership.user_id", cascade="all, delete-orphan")
 
 
 class Tenant(Base):

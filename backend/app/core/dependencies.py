@@ -138,7 +138,8 @@ async def get_tenant_context(
             detail="Identificador de schema de tenant inválido",
         )
 
-    # Configurar el search_path local a la transacción
+    # Configurar el search_path local a la transacción y recordarlo para transacciones futuras
+    db.info["tenant_schema"] = schema_name
     set_tenant_schema(db, schema_name)
 
     return TenantContext(

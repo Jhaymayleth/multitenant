@@ -10,6 +10,7 @@ import json
 import os
 import secrets
 import subprocess
+import sys
 import uuid
 from datetime import datetime, timedelta, timezone
 
@@ -54,6 +55,8 @@ class PlatformService:
     def _run_tenant_migrations(self, schema_name: str) -> None:
         """Aplica la cadena de migraciones del tenant sobre el schema indicado."""
         cmd = [
+            sys.executable,
+            "-m",
             "alembic",
             "-c",
             "migrations/tenant/alembic.ini",

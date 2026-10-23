@@ -8,6 +8,10 @@ requires-python = ">=3.12"
 testpaths = ["tests"]
 pythonpath = ["."]
 asyncio_mode = "auto"
+markers = [
+    "integration: pruebas que requieren PostgreSQL",
+    "security: pruebas de seguridad y aislamiento entre tenants",
+]
 
 [tool.ruff]
 line-length = 100

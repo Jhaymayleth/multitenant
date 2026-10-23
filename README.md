@@ -157,6 +157,24 @@ npm run dev
 
 ---
 
+## 5. Cumplimiento del enunciado
+
+Estado actual (Fase 1 en curso). Cada punto se demostrará con código y pruebas al cerrar su fase.
+
+| # | Punto del enunciado | Estado | Dónde |
+|---|---|---|---|
+| 1 | Qué es y por qué este nicho | ✅ Documentado | `docs/00-INDICE.md`, `docs/01-REQUERIMIENTOS.md` |
+| 2 | Arquitectura multitenant (schema `platform` + `tenant_<id>`) | 🟡 En implementación | `backend/app/core/database.py`, `docs/03-ARQUITECTURA.md`, `docs/07-MODELO-DATOS.md` |
+| 3 | Cómo levantar el proyecto (Docker + variables + URLs) | ✅ Implementado | Sección 4 de este README, `docker-compose.yml`, `.env.example` |
+| 4 | Resolución del tenant por petición (JWT httpOnly, membresía, `SET LOCAL search_path`) | 🟡 En implementación | `backend/app/core/dependencies.py`, `backend/app/core/security.py` |
+| 5 | Idempotencia y rate limiting (clave, tabla, TTL, 429 + `Retry-After`) | 🔴 Pendiente (Fase 4) | `docs/09-ROBUSTEZ.md` |
+| 6 | Estrategias de renderizado (SSG/ISR público, CSR panel) | 🟡 En implementación | `frontend/src/app`, `frontend/src/middleware.ts` |
+| 7 | Pruebas y CI | 🟡 En implementación | `backend/tests/`, `.github/workflows/ci.yml` |
+
+Leyenda: ✅ implementado · 🟡 en implementación · 🔴 pendiente.
+
+---
+
 ## 5. Verificación de Estado
 
 Puedes verificar que la API esté respondiendo ejecutando:

@@ -6,7 +6,8 @@ Basado en docs/04-MODULOS.md (Sección 9) y docs/07-MODELO-DATOS.md.
 from __future__ import annotations
 
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
+
 from sqlalchemy import CheckConstraint, Column, DateTime, ForeignKey, SmallInteger, String, Text
 from sqlalchemy.dialects.postgresql import UUID
 
@@ -14,7 +15,7 @@ from app.core.database import Base
 
 
 def utc_now() -> datetime:
-    return datetime.now(timezone.utc)
+    return datetime.now(UTC)
 
 
 class Reservation(Base):

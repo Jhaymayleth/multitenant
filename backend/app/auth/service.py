@@ -7,12 +7,13 @@ from __future__ import annotations
 
 import uuid
 from datetime import timedelta
+
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.core.config import Settings
 from app.core.security import create_access_token, verify_password
-from app.platform.models import TenantMembership, User
+from app.platform.models import User
 
 settings = Settings()
 

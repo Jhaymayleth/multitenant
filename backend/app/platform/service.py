@@ -7,10 +7,10 @@ y docs/04-MODULOS.md (Sección 3).
 from __future__ import annotations
 
 import secrets
-import uuid
+
 from sqlalchemy.orm import Session
 
-from app.platform.models import Tenant, TenantMembership, User
+from app.platform.models import Tenant
 from app.platform.repository import PlatformRepository
 from app.platform.schemas import TenantCreateRequest
 

@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 import uuid
-from typing import Sequence
+
 from fastapi import APIRouter, Depends, Header, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
 from app.core.dependencies import TenantContext, get_tenant_context, require_role
-from app.orders.schemas import OrderCreate, OrderResponse, OrderStatusUpdate
+from app.orders.schemas import OrderCreate, OrderResponse
 from app.orders.service import OrderService
 
 router = APIRouter(prefix="/tenant/orders", tags=["Tenant Orders"])

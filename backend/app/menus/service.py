@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import uuid
-from typing import Sequence
 from sqlalchemy.orm import Session
 
 from app.menus.models import MenuCategory, MenuProduct

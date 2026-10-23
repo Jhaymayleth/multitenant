@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Sequence
 from fastapi import APIRouter, Depends
 from sqlalchemy import select
 from sqlalchemy.orm import Session

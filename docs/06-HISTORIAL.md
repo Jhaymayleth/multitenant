@@ -99,3 +99,23 @@ Este documento registra cómo evolucionó la documentación y por qué cambiaron
 ---
 
 **Fin de `06-HISTORIAL.md`.**
+
+
+---
+
+## 4. Implementación Fase 2 — Hueso multitenant (octubre 2026)
+
+Rama: `feat/phase-2-multitenant-core`. Commits:
+
+| Commit | Descripción |
+|---|---|
+| `feat(db)` | Cadenas Alembic para `platform` y `tenant_<id>`; migración inicial de ambos schemas; `env.py` con filtro por schema y `search_path`. |
+| `feat(auth)` | `get_tenant_context` resuelve tenant y membresía desde la base de datos (autoritativo); fija `search_path` local. |
+| `feat(platform)` | Aprovisionamiento real: `CREATE SCHEMA`, migraciones del tenant, usuario CEO + membresía `owner`, `tenant_settings`, permisos a `lixus_app`, estado `pending_verification`, idempotencia por `Idempotency-Key`. |
+| `feat(auth)` | Login con `tenant_slug` que emite JWT con `tenant_id`/`role`; hashing con `bcrypt` directo (compatibilidad bcrypt 5). |
+| `test(isolation)` | Pruebas de aislamiento entre tenants; persistencia de `search_path` por transacción (`after_begin`); CI con Postgres/Redis. |
+
+Notas técnicas:
+- Se reemplazó `passlib` por `bcrypt` directo por incompatibilidad con bcrypt 5.
+- Se añadió un listener `after_begin` en SQLAlchemy para reaplicar `SET LOCAL search_path` en cada transacción, evitando pérdida de aislamiento tras `commit`/`refresh`.
+- Las migraciones del tenant se aplican vía `python -m alembic` con `-x schema=...`.

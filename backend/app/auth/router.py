@@ -22,15 +22,16 @@ router = APIRouter(prefix="/auth", tags=["Auth & Session"])
 @router.post("/login", response_model=TokenResponse, summary="Iniciar sesión y emitir cookie httpOnly")
 def login(data: LoginRequest, response: Response, db: Session = Depends(get_db)):
     service = AuthService(db)
-    user = service.authenticate_user(data.email, data.password)
-    if not user:
+    auth_result = service.authenticate_user(data.email, data.password, data.tenant_slug)
+    if not auth_result:
         # Mensaje genérico para no filtrar existencia de correos (docs/04-MODULOS.md)
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Credenciales incorrectas",
         )
 
-    token = service.generate_session_token(user)
+    user, tenant_id, role = auth_result
+    token = service.generate_session_token(user, tenant_id=tenant_id, role=role)
 
     # Configuración de cookie HttpOnly segura
     response.set_cookie(

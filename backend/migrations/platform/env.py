@@ -8,7 +8,7 @@ from sqlalchemy import MetaData, engine_from_config, pool
 from alembic import context
 
 # Asegurar que el paquete app sea importable
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..")))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
 from app.core.config import Settings
 from app.core.database import Base

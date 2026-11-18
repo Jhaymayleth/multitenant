@@ -19,7 +19,7 @@ from sqlalchemy.orm import Session
 
 from app.core.config import Settings
 from app.core.errors import AppError
-from app.core.security import sha256_hex
+from app.core.security import hash_password, sha256_hex
 from app.platform.models import (
     GlobalIdempotencyKey,
     Tenant,
@@ -107,6 +107,20 @@ class PlatformService:
             ).scalar_one_or_none()
 
             if idemp_row:
+                # TTL: una clave vencida no debe devolver una respuesta vieja.
+                if idemp_row.expires_at is not None and idemp_row.expires_at < datetime.now(timezone.utc):
+                    self.db.delete(idemp_row)
+                    self.db.commit()
+                    idemp_row = None
+
+            if idemp_row and idemp_row.request_hash != request_hash:
+                raise AppError(
+                    code="IDEMPOTENCY_CONFLICT",
+                    message="La clave de idempotencia ya se usó con un cuerpo distinto",
+                    status_code=409,
+                )
+
+            if idemp_row:
                 if idemp_row.status == "completed" and idemp_row.response_body:
                     tenant_id = idemp_row.response_body.get("tenant_id")
                     if tenant_id:
@@ -181,7 +195,7 @@ class PlatformService:
                     email=data.owner_email.lower(),
                     full_name=data.owner_full_name,
                     status="active",
-                    password_hash=None,
+                    password_hash=hash_password(data.owner_password),
                 )
                 self.db.add(user)
                 self.db.commit()

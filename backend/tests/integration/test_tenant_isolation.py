@@ -24,6 +24,7 @@ def _provision_tenant(client: TestClient, slug: str) -> dict:
             "contact_email": f"{slug}@example.com",
             "owner_full_name": f"Owner {slug}",
             "owner_email": f"owner-{slug}@example.com",
+            "owner_password": PASSWORD,
         },
         headers={"Idempotency-Key": f"iso-{slug}"},
     )

@@ -14,8 +14,9 @@ from typing import Annotated
 from fastapi import Cookie, Depends, Header, HTTPException, Request, status
 from sqlalchemy.orm import Session
 
+from app.core.config import Settings
 from app.core.database import SAFE_SCHEMA_REGEX, get_db, set_tenant_schema
-from app.core.security import decode_access_token
+from app.core.security import constant_time_compare, decode_access_token
 
 
 @dataclass
@@ -148,6 +149,28 @@ async def get_tenant_context(
         role=membership.role,
         user_id=str(user_uuid),
     )
+
+
+async def require_platform_admin(
+    x_platform_admin_key: Annotated[str | None, Header(alias="X-Platform-Admin-Key")] = None,
+) -> None:
+    """Cierra /platform/* y /audit: sin clave configurada no hay acceso.
+
+    Antes cualquiera podía listar tenants, crear schemas (DDL) y leer la
+    auditoría. La clave va en X-Platform-Admin-Key y se compara en tiempo
+    constante.
+    """
+    expected = Settings().platform_admin_key
+    if not expected:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Administración de plataforma no configurada",
+        )
+    if not x_platform_admin_key or not constant_time_compare(x_platform_admin_key, expected):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Permiso de plataforma denegado",
+        )
 
 
 def require_role(*allowed_roles: str) -> Callable:

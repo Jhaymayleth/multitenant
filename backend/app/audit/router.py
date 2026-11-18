@@ -9,8 +9,13 @@ from sqlalchemy.orm import Session
 from app.audit.models import AuditLog
 from app.audit.schemas import AuditLogResponse
 from app.core.database import get_db
+from app.core.dependencies import require_platform_admin
 
-router = APIRouter(prefix="/audit", tags=["Platform Audit"])
+router = APIRouter(
+    prefix="/audit",
+    tags=["Platform Audit"],
+    dependencies=[Depends(require_platform_admin)],
+)
 
 
 @router.get("", response_model=list[AuditLogResponse], summary="Consultar log de auditoría global")

@@ -19,5 +19,8 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# Aplica la migración de plataforma antes de arrancar: `docker compose up`
+# sobre un volumen limpio queda operativo sin comandos manuales. Sin --reload
+# (era una imagen de desarrollo).
+CMD ["sh", "-c", "alembic -c migrations/platform/alembic.ini upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
 

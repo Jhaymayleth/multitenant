@@ -18,6 +18,12 @@ class TenantCreateRequest(BaseModel):
     contact_email: EmailStr
     owner_full_name: str = Field(..., min_length=3, max_length=255)
     owner_email: EmailStr
+    owner_password: str = Field(
+        ...,
+        min_length=8,
+        max_length=128,
+        description="Contraseña inicial del owner; sin ella el CEO no podría iniciar sesión",
+    )
     timezone: str = Field(default="America/Bogota")
     currency: str = Field(default="COP", min_length=3, max_length=3)
 

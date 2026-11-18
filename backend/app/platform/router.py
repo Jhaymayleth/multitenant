@@ -6,11 +6,13 @@ Basado en docs/04-MODULOS.md (Sección 3).
 from __future__ import annotations
 
 import uuid
+from datetime import UTC, datetime
 
 from fastapi import APIRouter, Depends, Header, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
+from app.core.dependencies import require_platform_admin
 from app.platform.schemas import (
     PlanResponse,
     TenantCreateRequest,
@@ -19,7 +21,11 @@ from app.platform.schemas import (
 )
 from app.platform.service import PlatformService
 
-router = APIRouter(prefix="/platform", tags=["Platform (Lixus)"])
+router = APIRouter(
+    prefix="/platform",
+    tags=["Platform (Lixus)"],
+    dependencies=[Depends(require_platform_admin)],
+)
 
 
 @router.post(
@@ -82,7 +88,17 @@ def verify_tenant(
     tenant = service.repo.get_tenant_by_id(tenant_id)
     if not tenant:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Tenant no encontrado")
-    # Esqueleto de verificación
+
+    # Antes esto devolvía el tenant sin cambiar nada: el tenant se quedaba en
+    # pending_verification y su owner nunca podía operar.
+    if data.action == "approve":
+        tenant.status = "active"
+        tenant.activated_at = datetime.now(UTC)
+    else:
+        # El CHECK de la tabla no admite "rejected": se cancela el tenant.
+        tenant.status = "cancelled"
+    db.commit()
+    db.refresh(tenant)
     return tenant
 
 

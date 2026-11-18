@@ -66,6 +66,10 @@ class Settings(BaseSettings):
     files_allowed_image_types: str = "image/jpeg,image/png,image/webp"
 
     # ---- Rate limiting ----
+    # Clave para /platform/* y /audit. Sin ella esos endpoints quedan cerrados.
+    # Se envía en la cabecera X-Platform-Admin-Key.
+    platform_admin_key: str = ""
+
     rate_limit_login_per_minute: int = 6
     rate_limit_writes_per_minute: int = 30
 

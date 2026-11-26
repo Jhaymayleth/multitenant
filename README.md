@@ -2,6 +2,8 @@
 
 Lixus es un sistema SaaS multitenant diseñado para la gestión integral y presencia digital de restaurantes.
 
+> **Documentación de producto:** la fuente de verdad está en [`docs/README.md`](docs/README.md). Este README describe el repositorio y cómo levantarlo; no reemplaza las decisiones, el alcance ni las fichas de feature.
+
 ---
 
 ## 1. Arquitectura del Proyecto
@@ -42,14 +44,14 @@ El sistema se estructura como un **monolito modular** compuesto por un backend m
 
 ## 2. Las Tres Caras del Frontend
 
-Basado en las decisiones arquitectónicas D-001, D-074, D-075 y D-076:
+Basado en las decisiones arquitectónicas D-102 y D-108:
 
 1. **Web Pública del Restaurante (`(public-site)`)**:
-   - Resuelto por subdominio propio (`restaurante1.dominio.com`).
+   - Resuelta por el slug del restaurante; la forma definitiva de la URL está en D-124.
    - Plantilla común con personalización del tenant (logo, colores, horarios, menú publicado y reservas).
    - Acceso anónimo a mesas mediante códigos QR (`/mesa/[token]`).
 2. **Panel Privado del CEO del Restaurante (`(ceo-portal)`)**:
-   - Ruta privada dentro del mismo subdominio (`/admin`).
+   - Ruta privada del restaurante (`/admin`).
    - Exclusivo para el CEO del restaurante; acceso protegido por cookie `HttpOnly` y membresía activa (`owner`).
    - Gestión de catálogo, mesas, monitoreo de pedidos, cola de cocina, caja ligera y configuración visual.
 3. **Portal y Solicitud de Lixus (`(lixus)`)**:
@@ -102,7 +104,7 @@ multitenant/
 ├── infra/
 │   └── docker/
 │       └── postgres/init/01-init.sql # Extensiones (pgcrypto, citext, btree_gist) y roles
-├── docs/                            # Documentación integral de arquitectura y decisiones
+├── docs/                            # Documentación de producto (ver docs/README.md)
 ├── docker-compose.yml               # Orquestación de servicios (Postgres, Redis, API, Web)
 ├── .env.example                     # Plantilla de variables de entorno
 └── .github/workflows/ci.yml         # Pipeline de Integración Continua (Lint & Build)
@@ -273,21 +275,19 @@ docker compose exec backend pytest
 
 ---
 
-## 5. Cumplimiento del enunciado
+## 5. Estado del producto
 
-Estado actual (Fase 1 en curso). Cada punto se demostrará con código y pruebas al cerrar su fase.
+El estado real, área por área, vive en [`docs/00-gobierno/estado-producto.md`](docs/00-gobierno/estado-producto.md). Resumen:
 
-| # | Punto del enunciado | Estado | Dónde |
-|---|---|---|---|
-| 1 | Qué es y por qué este nicho | ✅ Documentado | `docs/00-INDICE.md`, `docs/01-REQUERIMIENTOS.md` |
-| 2 | Arquitectura multitenant (schema `platform` + `tenant_<id>`) | 🟡 En implementación | `backend/app/core/database.py`, `docs/03-ARQUITECTURA.md`, `docs/07-MODELO-DATOS.md` |
-| 3 | Cómo levantar el proyecto (Docker + variables + URLs) | ✅ Implementado | Sección 4 de este README, `docker-compose.yml`, `.env.example` |
-| 4 | Resolución del tenant por petición (JWT httpOnly, membresía, `SET LOCAL search_path`) | 🟡 En implementación | `backend/app/core/dependencies.py`, `backend/app/core/security.py` |
-| 5 | Idempotencia y rate limiting (clave, tabla, TTL, 429 + `Retry-After`) | 🔴 Pendiente (Fase 4) | `docs/09-ROBUSTEZ.md` |
-| 6 | Estrategias de renderizado (SSG/ISR público, CSR panel) | 🟡 En implementación | `frontend/src/app`, `frontend/src/middleware.ts` |
-| 7 | Pruebas y CI | 🟡 En implementación | `backend/tests/`, `.github/workflows/ci.yml` |
+| Área | Estado | Referencia |
+|---|---|---|
+| Núcleo multitenant y producción | EN PRODUCCIÓN | `docs/03-arquitectura/multitenancy.md`, `docs/06-infra-ops/despliegue.md` |
+| Administración Lixus y autenticación | PARCIAL | `docs/04-backend/features/plataforma-tenants.md`, `docs/04-backend/features/identidad-sesion.md` |
+| Operación del restaurante (menú, mesas, pedidos, reservas) | PARCIAL | `docs/04-backend/features/` |
+| Caja, comprobantes y suscripciones | NO INICIADO | `docs/04-backend/features/pagos-comprobantes.md`, `docs/04-backend/features/suscripciones.md` |
+| Frontend conectado a la API | NO INICIADO | `docs/05-frontend/areas.md` |
 
-Leyenda: ✅ implementado · 🟡 en implementación · 🔴 pendiente.
+La deuda que bloquea la venta está en [`docs/07-calidad/deuda-tecnica.md`](docs/07-calidad/deuda-tecnica.md).
 
 ---
 

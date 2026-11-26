@@ -105,30 +105,20 @@ jobs:
 
   # ---------------------------------------------------------------------------
   # CD: solo en push a develop (o manual) y solo si los tres jobs pasaron.
-  # Despliega por SSH con una clave dedicada que, en el servidor, solo puede
-  # ejecutar `sudo /opt/lixus/ops/deploy.sh` (ver ops/deploy.sh).
   #
-  # Si algun dia la cuenta AWS permite OIDC + roles IAM, este paso se puede
-  # sustituir por SSM Run Command y cerrar el puerto 22.
+  # Corre en un runner self-hosted que vive EN la instancia de produccion
+  # (label `lixus`). Asi no hay puerto 22 abierto, ni clave SSH, ni secrets:
+  # GitHub entrega el job al runner y el runner ejecuta ops/deploy.sh.
+  # Ver ops/deploy.sh para el despliegue idempotente con rollback.
   # ---------------------------------------------------------------------------
   deploy:
     needs: [backend, frontend, docker]
     if: github.ref == 'refs/heads/develop' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, lixus]
     timeout-minutes: 30
     concurrency:
       group: deploy-develop
       cancel-in-progress: false
     steps:
-      - name: Desplegar por SSH
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.DEPLOY_SSH_KEY }}
-          port: 22
-          command_timeout: 25m
-          script_stop: true
-          script: |
-            set -eu
-            sudo /opt/lixus/ops/deploy.sh develop
+      - name: Desplegar en el servidor
+        run: sudo /opt/lixus/ops/deploy.sh develop

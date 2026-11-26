@@ -104,7 +104,8 @@ jobs:
         run: docker compose build
 
   # ---------------------------------------------------------------------------
-  # CD: solo en push a develop (o manual) y solo si los tres jobs pasaron.
+  # CD: solo en push a main (o manual desde main) y solo si los tres jobs
+  # pasaron. `develop` es integracion: sus push solo pasan tests, no despliegan.
   #
   # Corre en un runner self-hosted que vive EN la instancia de produccion
   # (label `lixus`). Asi no hay puerto 22 abierto, ni clave SSH, ni secrets:
@@ -113,12 +114,12 @@ jobs:
   # ---------------------------------------------------------------------------
   deploy:
     needs: [backend, frontend, docker]
-    if: github.ref == 'refs/heads/develop' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     runs-on: [self-hosted, lixus]
     timeout-minutes: 30
     concurrency:
-      group: deploy-develop
+      group: deploy-production
       cancel-in-progress: false
     steps:
       - name: Desplegar en el servidor
-        run: sudo /opt/lixus/ops/deploy.sh develop
+        run: sudo /opt/lixus/ops/deploy.sh main

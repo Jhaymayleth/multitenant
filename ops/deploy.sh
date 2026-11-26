@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # -----------------------------------------------------------------------------
 # Lixus — despliegue de produccion
-# Ejecutado por GitHub Actions por SSH (via sudo) o a mano en el servidor.
+# Ejecutado por el runner self-hosted de GitHub Actions (via sudo) o a mano.
 #
 # Propiedades:
 #   * Idempotente: si ya esta en el commit pedido, no hace nada.
@@ -11,7 +11,7 @@
 # -----------------------------------------------------------------------------
 set -euo pipefail
 
-BRANCH="${1:-develop}"
+BRANCH="${1:-main}"
 APP_DIR="${APP_DIR:-/opt/lixus}"
 APP_URL="${APP_URL:-https://lixus.coderhivex.com}"
 COMPOSE_FILE="docker-compose.prod.yml"
@@ -28,6 +28,13 @@ PREV=$(git rev-parse HEAD)
 
 git fetch --quiet --prune origin
 TARGET=$(git rev-parse "origin/$BRANCH")
+
+# Produccion sigue una sola rama: si el clon se quedo en otra, lo movemos
+CURRENT=$(git rev-parse --abbrev-ref HEAD)
+if [ "$CURRENT" != "$BRANCH" ]; then
+  log "clon estaba en $CURRENT; lo dejo en $BRANCH"
+  git checkout --quiet -B "$BRANCH" "$TARGET"
+fi
 
 if [ "$PREV" = "$TARGET" ]; then
   log "sin cambios ($PREV); nada que hacer"

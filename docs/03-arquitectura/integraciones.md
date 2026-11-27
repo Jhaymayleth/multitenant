@@ -3,7 +3,7 @@
 **Estado:** Borrador
 **Última revisión:** 26 de noviembre de 2026
 **Dueño:** Ingeniería
-**Decisiones abiertas:** PD-23, PD-26
+**Decisiones abiertas:** PD-23, PD-26, PD-31, PD-32, PD-33
 
 ## 1. Principio
 
@@ -14,6 +14,7 @@ Toda integración externa se encapsula detrás de una interfaz del backend. El r
 | Integración | Uso | Estado | Interfaz | Variables |
 |---|---|---|---|---|
 | Cloudflare R2 | Imágenes de menú y marca | Prevista | `StorageProvider` | `R2_*` |
+| Elasticsearch | Búsqueda de menú por tenant | Aprobada, pendiente de implementar (D-162) | `SearchProvider` | `ELASTICSEARCH_*` |
 | Correo transaccional | Invitaciones, códigos, avisos | No iniciada | `EmailProvider` | `EMAIL_*` |
 | Pagos | Cobro de pedidos con pasarela del restaurante y suscripción con pasarela de Lixus | No iniciada | `RestaurantPaymentProvider` + `SubscriptionProvider` | `PAYMENT_*` |
 | Google | Login de clientes registrados | Prevista | `OAuthProvider` | `GOOGLE_*` |
@@ -29,6 +30,15 @@ Toda integración externa se encapsula detrás de una interfaz del backend. El r
 - Validación de tipo y tamaño antes de subir.
 - URL firmada para lectura.
 - No se sirve un archivo sin verificar el tenant.
+
+### 3.1 Búsqueda de menú
+
+- Elasticsearch indexa solo una proyección de los productos publicados: identificador, nombre, descripción, precio y categoría.
+- Un índice por tenant, con nombre derivado en servidor del `schema_name`. El cliente nunca elige índice.
+- La sincronía sale de PostgreSQL: tras el `commit`, un evento en Redis dispara el reindexado de ese tenant.
+- Si Elasticsearch falla, el backend busca con full-text de PostgreSQL dentro del schema del tenant.
+- El índice se reconstruye desde PostgreSQL; no necesita backup propio.
+- MongoDB, Cassandra y Neo4j quedan diferidos en PD-31, PD-32 y PD-33.
 
 ## 4. Correo
 

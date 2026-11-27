@@ -70,10 +70,13 @@ Estados: `PROPUESTA`, `APROBADA`, `POR DEFINIR`, `SUSTITUIDA`.
 | D-159 | 2026-11-27 | Producto | Liberar una mesa manualmente exige motivo y solo se permite si no hay sesión activa ni pedido sin cobrar. Si se fuerza, la acción queda registrada. | Evita que una mesa aparezca libre mientras sigue abierta una operación pendiente, sin perder la trazabilidad de la acción manual. | APROBADA | 04, 05 |
 | D-160 | 2026-11-27 | Producto | Las reservas online siguen en P1 (BL-11), no entran en el MVP. Se activan por configuración de cada tenant, sin ligarlas a un plan comercial mientras D-139 siga pendiente de cifras. | El foco es D-151; un flag por restaurante permite activar la capacidad cuando esté terminada sin prometerla antes. | APROBADA | 01, 02, 04, 05 |
 | D-161 | 2026-11-27 | Producto | La ventana de reserva es configurable por tenant. Valores por defecto propuestos: mínimo 2 horas y máximo 30 días. Toda reserva y toda ocupación manual validan que la mesa esté libre en la franja; el mesero puede forzar con motivo registrado. | Evita solapes reales sin perder reservas del mismo día; una ventana fija de 8 horas a 1 día trataba el síntoma, no la causa. | APROBADA | 01, 04, 05 |
+| D-162 | 2026-11-27 | Arquitectura | Se incorpora Elasticsearch como índice de solo lectura para la búsqueda de menú dentro de un restaurante. PostgreSQL sigue siendo la única fuente de verdad. El índice se crea por tenant con un nombre derivado en servidor del `schema_name`; la sincronía se hace desde PostgreSQL mediante un evento en Redis; si Elasticsearch falla, la búsqueda cae a full-text de PostgreSQL. El índice es reconstruible y no requiere backup propio. MongoDB, Cassandra y Neo4j quedan diferidos con criterios medibles (PD-31, PD-32, PD-33). | Es la única de las cuatro tecnologías que se añade sin quitar responsabilidad a PostgreSQL ni romper el aislamiento por schema: es una proyección derivada, degradable y sin obligación nueva de restauración. | APROBADA · pendiente de implementación | 00, 03, 04, 05, 07 |
 
 > D-145 sustituye a D-111, D-114 y la parte de “caja ligera” de D-121 en todo lo relativo al cobro de pedidos. D-128 se mantiene para pagos de pedidos y se matiza con D-140 para la suscripción.
 
 > D-155 sustituye a D-147 y D-156 deja sin efecto la parte de domicilio de D-110. El domicilio queda fuera del producto sin fecha; solo se registra como pedido simple y se puede mostrar un enlace externo configurado por el restaurante.
+
+> D-162 complementa a D-104 sin reabrirla: añade un índice de búsqueda derivado, no una nueva fuente de verdad. El stack aprobado sigue siendo PostgreSQL + Redis; Elasticsearch entra solo como proveedor de lectura y con degradación controlada.
 
 > **Parte legal diferida:** PD-14, PD-15, PD-16, PD-17 y PD-28 quedan POR DEFINIR. D-150 fue cancelada a solicitud del dueño. No se publica ningún documento legal como vigente hasta revisión de abogado y de que la aplicación funcione.
 
@@ -82,7 +85,7 @@ Estados: `PROPUESTA`, `APROBADA`, `POR DEFINIR`, `SUSTITUIDA`.
 ## Decisiones que no se reabren sin evidencia nueva
 
 - Aislamiento por schema (D-103).
-- Stack (D-104).
+- Stack (D-104), ampliado con el índice de búsqueda de D-162.
 - Cookie `httpOnly` (D-105).
 - Resolución de tenant en servidor (D-106).
 - Alta gestionada por Lixus (D-107).

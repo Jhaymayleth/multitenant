@@ -1,9 +1,9 @@
 # Arquitectura del sistema
 
 **Estado:** Vigente
-**Última revisión:** 26 de noviembre de 2026
+**Última revisión:** 27 de noviembre de 2026
 **Dueño:** Ingeniería
-**Decisiones:** D-102, D-104, D-115
+**Decisiones:** D-102, D-104, D-115, D-162
 
 ## 1. Vista general
 
@@ -11,8 +11,9 @@ Lixus es un monolito modular con dos aplicaciones desplegables y servicios de ap
 
 - **Frontend:** Next.js 15 con React 19 y TypeScript.
 - **Backend:** FastAPI con Python 3.12, SQLAlchemy y Alembic.
-- **Base de datos:** PostgreSQL 16, con schema `platform` y un schema por tenant.
+- **Base de datos:** PostgreSQL 16, con schema `platform` y un schema por tenant. Es la única fuente de verdad.
 - **Caché y límites:** Redis 7.
+- **Búsqueda:** Elasticsearch como índice de solo lectura del menú, por tenant y reconstruible (D-162, pendiente de implementar).
 - **Archivos:** Cloudflare R2 (previsto).
 - **Borde:** Nginx con TLS.
 
@@ -27,6 +28,8 @@ Nginx (TLS, cabeceras, proxy)
                          ├── Redis: rate limiting, sesión, caché
                          └── R2 / correo / pagos / IA (previstos)
 ```
+
+El índice de Elasticsearch se alimenta desde PostgreSQL y no guarda la fuente de verdad. Redis transporta los eventos de reindexado.
 
 ## 2. Las tres caras
 
@@ -62,7 +65,8 @@ Las tres caras comparten backend y modelo de datos. La separación es de respons
 | Frontend | Presentar, navegar y enviar formularios | Decidir permisos o tenant |
 | Backend | Validar, autorizar, calcular y persistir | Confiar en precios o roles del cliente |
 | PostgreSQL | Guardar datos y aislar por schema | Decidir reglas de negocio |
-| Redis | Límites, sesión y caché | Ser fuente de verdad |
+| Redis | Límites, sesión, eventos y caché | Ser fuente de verdad |
+| Elasticsearch | Buscar menú por tenant sobre una proyección | Guardar precios o ser la fuente de los productos |
 | Nginx | TLS, proxy y cabeceras | Lógica de negocio |
 | R2 | Archivos | Servir datos privados sin firma |
 
@@ -93,5 +97,6 @@ Detalle en `06-infra-ops/`.
 - Rate limiting y idempotencia completa.
 - Observabilidad con `request_id` y métricas.
 - Backups verificados.
+- Proveedor de búsqueda con Elasticsearch aprobado pero no implementado (D-162).
 
 Ver `07-calidad/deuda-tecnica.md`.

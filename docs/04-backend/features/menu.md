@@ -4,6 +4,7 @@
 **Dueño:** Ingeniería
 **Documento frontend:** `05-frontend/features/menu.md`
 **Especificación de la feature:** [`05-frontend/menu-api.md`](../../05-frontend/menu-api.md) (BL-03)
+**Búsqueda:** Elasticsearch aprobado en D-162 como índice de solo lectura; pendiente de implementar (RT-27). PostgreSQL sigue siendo la fuente de verdad.
 
 ## 1. Objetivo
 

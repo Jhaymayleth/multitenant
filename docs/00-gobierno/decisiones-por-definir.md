@@ -10,6 +10,8 @@ Cada fila es una pregunta abierta. El default es una propuesta del PO, no una de
 
 **Nota (D-151):** el foco es el MVP. Las preguntas abiertas de negocio y operación (PD-04, PD-07, PD-08, PD-12, PD-13, PD-18, PD-23 y PD-29) también quedan diferidas; no bloquean el desarrollo.
 
+**Nota (D-162):** Elasticsearch queda aprobado como índice de búsqueda de menú. MongoDB, Cassandra y Neo4j siguen en `POR DEFINIR` con disparadores medibles; no se incorporan por preferencia tecnológica.
+
 | ID | Área | Pregunta | Impacto | Default propuesto | Estado |
 |---|---|---|---|---|---|
 | PD-04 | Mercado | ¿Quién decide la compra y quién influye? | Guion comercial y onboarding | Dueño o gerente; influyen administrador y contador | POR DEFINIR |
@@ -25,6 +27,9 @@ Cada fila es una pregunta abierta. El default es una propuesta del PO, no una de
 | PD-23 | Operación | ¿Proveedor de correo transaccional? | Invitaciones, códigos y avisos | Resend o Postmark, detrás de una interfaz | POR DEFINIR |
 | PD-28 | Legal | ¿Exportación y eliminación de datos de un tenant? | Contratos y operación | Exportación CSV/JSON bajo solicitud; eliminación a los 30 días de cancelar, salvo obligación legal | POR DEFINIR |
 | PD-29 | Operación | ¿RPO, RTO y retención de backups? | Continuidad | RPO 24 h, RTO 4 h, backups diarios por 30 días | POR DEFINIR |
+| PD-31 | Arquitectura | ¿MongoDB para catálogo o perfil? | Fuentes de verdad y transacciones | Diferido. Solo si los atributos del catálogo son tan variables que `JSONB` deje de servir y se definiera una estrategia de sincronía con los pedidos. Hoy no se mueve la identidad ni el catálogo fuera de PostgreSQL. | POR DEFINIR |
+| PD-32 | Arquitectura | ¿Cassandra para solicitudes cliente–mesero? | Volumen y consistencia | Diferido. Solo con escrituras masivas append-only y disponibilidad multi-región; hoy `service_requests` en PostgreSQL y avisos por Redis. | POR DEFINIR |
+| PD-33 | Arquitectura | ¿Neo4j para recomendaciones? | Relaciones y datos necesarios | Diferido. Solo cuando exista historial real de pedidos (BL-04 y BL-12) y la co-ocurrencia en `order_items` no resuelva el caso. | POR DEFINIR |
 
 ## Cerradas
 

@@ -261,6 +261,7 @@ Todos los mensajes van en español, sin trazas ni URLs internas (D-123). Los con
 - BL-06 publicará el sitio; esta feature solo consume `tenant_settings.is_published`.
 - BL-04 tomará nombre y precio del catálogo al crear el pedido.
 - Deuda RT-01 y RT-20 en [`07-calidad/deuda-tecnica.md`](../07-calidad/deuda-tecnica.md).
+- D-162 aprueba Elasticsearch como índice de búsqueda de menú; queda fuera de esta feature y se registra como RT-27. La lista actual no ofrece búsqueda dedicada.
 
 ## 12. Riesgos
 

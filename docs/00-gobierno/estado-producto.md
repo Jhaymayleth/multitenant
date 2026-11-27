@@ -41,6 +41,7 @@ Lixus tiene un núcleo multitenant real y un despliegue productivo con HTTPS. El
 - No hay CSRF ni revocación de sesión.
 - No hay correo transaccional.
 - No hay pasarela de pagos.
+- No hay índice de búsqueda: Elasticsearch está aprobado en D-162 pero no implementado (RT-27).
 - No hay IA.
 - El frontend no llama a la API.
 - No hay decisiones legales cerradas: jurisdicción, datos, retención y contratos están diferidos.

@@ -1,7 +1,7 @@
 # API
 
 **Estado:** Vigente
-**Última revisión:** 26 de noviembre de 2026
+**Última revisión:** 27 de noviembre de 2026
 **Dueño:** Ingeniería
 
 ## 1. Base
@@ -55,6 +55,10 @@ Estado actual: algunas rutas devuelven `{"detail": "..."}`. La unificación es d
 - Dinero en enteros (`*_cents`).
 - Moneda del tenant en su configuración.
 
+### Búsqueda de menú
+
+`GET /tenant/menu/products?q=` busca dentro del tenant resuelto en servidor. El proveedor es Elasticsearch sobre un índice por tenant (D-162); si no responde, el backend cae a full-text de PostgreSQL. El cliente no elige índice ni envía `tenant_id`.
+
 ## 3. Endpoints actuales
 
 ### Salud
@@ -88,8 +92,14 @@ Estado actual: algunas rutas devuelven `{"detail": "..."}`. La unificación es d
 |---|---|---|
 | GET | `/tenant/menu/categories` | Lista categorías |
 | POST | `/tenant/menu/categories` | Crea categoría |
-| GET | `/tenant/menu/products` | Lista productos |
+| GET | `/tenant/menu/products` | Lista productos; acepta `q` para búsqueda (D-162) |
 | POST | `/tenant/menu/products` | Crea producto |
+| PUT | `/tenant/menu/products/{id}` | Edita producto |
+| DELETE | `/tenant/menu/products/{id}` | Retira producto |
+| PATCH | `/tenant/menu/products/{id}/publication` | Publica u oculta |
+| PATCH | `/tenant/menu/products/{id}/order` | Reordena |
+| PUT | `/tenant/menu/categories/{id}` | Edita categoría |
+| DELETE | `/tenant/menu/categories/{id}` | Retira categoría |
 
 ### Mesas
 

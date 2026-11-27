@@ -49,6 +49,7 @@ Registra cambios de producto, documentación e infraestructura. No sustituye al 
 - Se aprueba liberar mesa solo con motivo y sin pedido pendiente (D-159).
 - Se mantienen las reservas en P1, activables por tenant y sin ligar a plan (D-160).
 - Se aprueba la ventana de reserva configurable con validación de solape al reservar y al ocupar (D-161).
+- Se aprueba Elasticsearch como índice de solo lectura para búsqueda de menú, con PostgreSQL como fuente de verdad y degradación controlada (D-162); MongoDB, Cassandra y Neo4j quedan en PD-31, PD-32 y PD-33.
 - El material anterior pasa a `_legado/` como referencia histórica.
 
 ## 1.0 — 2026-11-24

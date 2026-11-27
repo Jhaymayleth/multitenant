@@ -1,7 +1,7 @@
 # Deuda técnica
 
 **Estado:** Vigente
-**Última revisión:** 26 de noviembre de 2026
+**Última revisión:** 27 de noviembre de 2026
 **Dueño:** Ingeniería
 
 Prioridad: **P0** bloquea vender u operar; **P1** afecta calidad o seguridad; **P2** mejora.
@@ -34,6 +34,7 @@ Prioridad: **P0** bloquea vender u operar; **P1** afecta calidad o seguridad; **
 | RT-24 | Token de runner expuesto en documentación antigua | `VARIABLES_ENTORNO.md` | Seguridad | P0 |
 | RT-25 | Código y modelos sin uso | Modelos y esquemas huérfanos | Mantenimiento | P2 |
 | RT-26 | CORS con `localhost` fijo | `main.py` | Configuración incorrecta | P2 |
+| RT-27 | Búsqueda de menú sin proveedor dedicado | Solo `ILIKE`, sin `SearchProvider` (D-162) | Búsqueda limitada al crecer el catálogo | P1 |
 
 ## Orden recomendado
 
@@ -41,7 +42,8 @@ Prioridad: **P0** bloquea vender u operar; **P1** afecta calidad o seguridad; **
 2. RT-03, RT-04, RT-05, RT-06: seguridad y robustez.
 3. RT-10, RT-11, RT-12, RT-13, RT-14: operación diaria.
 4. RT-22, RT-24: continuidad y secreto.
-5. Resto.
+5. RT-27 cuando el catálogo o el número de tenants lo justifique.
+6. Resto.
 
 ## Regla
 

@@ -4,6 +4,7 @@
 **Dueño:** Ingeniería
 **Documento backend:** `04-backend/features/menu.md`
 **Especificación de la feature:** [`menu-api.md`](../menu-api.md) (BL-03)
+**Búsqueda:** D-162 aprueba un índice de solo lectura por tenant; hoy la lista usa la API sin búsqueda dedicada (RT-27).
 
 ## 1. Objetivo
 

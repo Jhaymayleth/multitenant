@@ -187,3 +187,25 @@ def require_role(*allowed_roles: str) -> Callable:
 
     return role_checker
 
+
+# Permisos derivados de la matriz aprobada en D-146. El frontend los usa para
+# mostrar u ocultar acciones; la autoridad sigue siendo require_role en cada ruta.
+ROLE_PERMISSIONS: dict[str, tuple[str, ...]] = {
+    "owner": (
+        "menu:read", "menu:write", "orders:read", "orders:write",
+        "tables:read", "tables:write", "staff:read", "staff:write",
+        "site:edit", "site:publish", "billing:read",
+    ),
+    "admin": (
+        "menu:read", "menu:write", "orders:read", "orders:write",
+        "tables:read", "tables:write", "staff:read", "staff:write",
+        "site:edit",
+    ),
+    "waiter": ("menu:read", "orders:read", "orders:write", "tables:read", "tables:write", "requests:attend"),
+    "cook": ("orders:read", "kitchen:write"),
+}
+
+
+def permissions_for_role(role: str | None) -> list[str]:
+    return list(ROLE_PERMISSIONS.get(role or "", ()))
+

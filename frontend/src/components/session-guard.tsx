@@ -26,8 +26,8 @@ export function SessionGuard({ children, allowedRoles }: Props) {
     getCurrentUser()
       .then((me) => {
         if (!alive) return;
-        if (!me.activeTenantId) {
-          setMessage('Tu cuenta no tiene un restaurante activo seleccionado.');
+        if (!me.activeTenantId || (me.activeTenant && me.activeTenant.status !== 'active')) {
+          setMessage('Restaurante no disponible. Tu acceso está inactivo.');
           return;
         }
         setUser(me);

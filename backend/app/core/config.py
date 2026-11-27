@@ -57,6 +57,7 @@ class Settings(BaseSettings):
     jwt_secret: str = "changeme_jwt_secret_do_not_use_in_prod"
     jwt_algorithm: str = "HS256"
     jwt_access_token_ttl_minutes: int = 60
+    cookie_secure: bool = False
 
     # ---- Desarrollo ----
     dev_password_hash: str = "changeme_do_not_use_in_prod"

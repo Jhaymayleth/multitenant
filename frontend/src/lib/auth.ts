@@ -5,12 +5,21 @@
 
 import { apiFetch } from './api';
 
+export interface TenantBrief {
+  id: string;
+  slug: string;
+  name: string;
+  status: string;
+}
+
 export interface SessionUser {
   id: string;
   email: string;
   fullName: string;
   activeTenantId: string | null;
+  activeTenant: TenantBrief | null;
   role: string | null;
+  permissions: string[];
 }
 
 interface MeResponse {
@@ -19,8 +28,9 @@ interface MeResponse {
   full_name?: string;
   fullName?: string;
   active_tenant_id?: string | null;
-  activeTenantId?: string | null;
+  active_tenant?: TenantBrief | null;
   role?: string | null;
+  permissions?: string[];
 }
 
 interface TokenResponse {
@@ -38,8 +48,10 @@ export async function getCurrentUser(): Promise<SessionUser> {
     id: me.id,
     email: me.email,
     fullName: me.full_name || me.fullName || '',
-    activeTenantId: me.active_tenant_id ?? me.activeTenantId ?? null,
+    activeTenantId: me.active_tenant_id ?? me.active_tenant?.id ?? null,
+    activeTenant: me.active_tenant ?? null,
     role: me.role ?? null,
+    permissions: me.permissions ?? [],
   };
 }
 

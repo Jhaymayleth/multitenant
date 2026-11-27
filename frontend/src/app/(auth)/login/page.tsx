@@ -22,8 +22,8 @@ export default function LoginPage() {
 
     try {
       const user = await login(email, password, tenantSlug);
-      if (!user.activeTenantId) {
-        setError('Tu cuenta no tiene un restaurante activo seleccionado.');
+      if (!user.activeTenantId || (user.activeTenant && user.activeTenant.status !== 'active')) {
+        setError('Restaurante no disponible. Tu acceso está inactivo.');
         return;
       }
       router.push('/admin');

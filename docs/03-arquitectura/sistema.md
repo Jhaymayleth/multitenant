@@ -32,7 +32,7 @@ Nginx (TLS, cabeceras, proxy)
 
 | Cara | Ruta | Usuario | Autenticación |
 |---|---|---|---|
-| Web pública | `/r/{slug}` (propuesto) | Visitante y comensal | No |
+| Web pública | `/r/{slug}` (D-124) | Visitante y comensal | No |
 | Panel del CEO | `/admin` | CEO y personal autorizado | Sí, cookie httpOnly |
 | Portal Lixus | `/portal` y `/solicita` | Equipo Lixus y solicitante | Sí, clave o JWT de plataforma |
 

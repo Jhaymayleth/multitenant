@@ -4,7 +4,7 @@
 **Última revisión:** 26 de noviembre de 2026
 **Dueño:** Producto
 
-Estas son hipótesis de trabajo basadas en la operación descrita. Deben validarse con entrevistas antes de convertirse en decisiones de producto.
+El segmento inicial está aprobado en D-137. Las descripciones siguientes son hipótesis de trabajo basadas en la operación descrita y deben validarse con entrevistas antes de convertirse en decisiones de producto.
 
 ## 1. Comprador: dueño operador
 
@@ -35,31 +35,25 @@ Estas son hipótesis de trabajo basadas en la operación descrita. Deben validar
 - No necesita configurar el restaurante ni ver reportes financieros.
 - Éxito: menos idas y venidas a cocina y menos errores al cobrar.
 
-## 4. Usuario: cajero
-
-- Necesita cerrar la cuenta correcta, registrar el pago y entregar un comprobante.
-- No necesita editar el menú ni cambiar precios.
-- Éxito: cobrar sin recalcular y sin discutir con la mesa.
-
-## 5. Usuario: cocinero
+## 4. Usuario: cocinero
 
 - Necesita ver qué pedidos entraron, para qué mesa y en qué orden.
 - No necesita ver datos personales del cliente ni precios.
 - Éxito: una cola de preparación clara y actualizada.
 
-## 6. Cliente final: comensal
+## 5. Cliente final: comensal
 
 - Quiere ver el menú, saber horarios y reservar o pedir sin fricción.
 - No quiere descargar una app ni crear una cuenta para consultar.
 - Éxito: encuentra lo que busca y completa la acción en menos de dos minutos.
 
-## 7. Usuario interno: equipo Lixus
+## 6. Usuario interno: equipo Lixus
 
 - Da de alta restaurantes, verifica negocios y resuelve incidencias.
 - Necesita ver el estado del tenant sin entrar a sus datos operativos.
 - Éxito: onboarding repetible y soporte con contexto.
 
-## 8. Preguntas de validación
+## 7. Preguntas de validación
 
 1. ¿Quién firma el pago y quién lo sugiere?
 2. ¿Qué pasa hoy cuando se cae el sistema o se acaba el papel?

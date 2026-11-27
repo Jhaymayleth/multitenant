@@ -1,9 +1,9 @@
 # Alcance del producto
 
-**Estado:** Borrador
-**Última revisión:** 26 de noviembre de 2026
+**Estado:** Vigente (D-121)
+**Última revisión:** 27 de noviembre de 2026
 **Dueño:** Producto
-**Decisión abierta:** PD-06
+**Decisión:** D-121
 
 ## 1. Principio de alcance
 
@@ -20,14 +20,14 @@ La versión que se vende debe resolver el día completo de un restaurante indepe
 | Mesas y QR | Mesas con zona y estado; QR por mesa; solicitudes del cliente | PARCIAL |
 | Pedidos | Pedido de mesa por el mesero, líneas, notas, cocina y estados | PARCIAL |
 | Reservas | Disponibilidad, reserva con cuenta, estados y no-show | PARCIAL |
-| Caja ligera | Registrar pago, cerrar mesa, comprobante y QR de descarga | NO INICIADO |
+| Cobro de pedidos | Botón de pago con pasarela del restaurante, comprobante y QR; sin cajero | NO INICIADO |
 | Página pública | Marca, menú, horarios, contacto y publicación | PARCIAL |
 | Panel del CEO | Resumen del día y acceso a las áreas anteriores | PARCIAL |
 | Administración Lixus | Tenants, verificación, planes y estado del servicio | PARCIAL |
 
 ## 3. Qué queda fuera de la versión que se vende
 
-- Procesamiento real de pagos con tarjeta y conciliación bancaria.
+- Caja, arqueo, manejo de efectivo y conciliación bancaria del restaurante.
 - Facturación fiscal y contabilidad.
 - POS con turnos, arqueo, inventario y devoluciones.
 - Reparto con flota propia o seguimiento en mapa.
@@ -49,7 +49,7 @@ Se considera listo cuando se cumplen todos estos puntos:
 2. El CEO carga su menú, sus mesas y su personal.
 3. Un mesero registra un pedido con líneas y total correcto.
 4. Cocina ve el pedido y cambia su estado.
-5. El cajero registra el pago, la mesa queda libre y el comprobante se descarga.
+5. El cobro se confirma por webhook, la mesa queda libre y el comprobante se descarga.
 6. Un cliente consulta la página pública, ve el menú y reserva.
 7. El restaurante no puede ver datos de otro restaurante.
 8. El frontend consume la API y muestra errores comprensibles.

@@ -7,6 +7,8 @@
 
 El roadmap se organiza por resultados, no por lista de funciones. Cada fase tiene un criterio de salida. Si no se cumple, no se avanza.
 
+**Foco actual (D-151):** se trabaja en el MVP, principalmente Fase 1. Las fases comerciales y de operación son planificación futura, no una actividad en marcha.
+
 ## Fase 0 — Cimientos comerciales (M1)
 
 **Objetivo:** poder vender con claridad y sin inventar.
@@ -38,7 +40,7 @@ El roadmap se organiza por resultados, no por lista de funciones. Cada fase tien
 **Objetivo:** que el restaurante use Lixus todos los días.
 
 - Reservas con disponibilidad y no-show.
-- Caja ligera, comprobante y QR de descarga.
+- Cobro de pedidos por pasarela del restaurante, comprobante y QR de descarga.
 - Personal, roles y revocación de acceso.
 - Resumen del día para el CEO.
 - Correo transaccional para invitaciones y avisos.
@@ -61,7 +63,7 @@ El roadmap se organiza por resultados, no por lista de funciones. Cada fase tien
 
 **Objetivo:** reducir el costo de servir a cada restaurante.
 
-- Pagos en línea con proveedor real, si el negocio lo justifica.
+- Mejoras en las pasarelas de suscripción y de pedidos, si el negocio lo justifica.
 - Notificaciones y avisos automáticos.
 - Reportes operativos y exportación.
 - Integraciones acordadas con clientes.

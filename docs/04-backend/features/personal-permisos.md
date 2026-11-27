@@ -2,7 +2,7 @@
 
 **Estado:** PARCIAL
 **Dueño:** Ingeniería
-**Decisión abierta:** PD-22
+**Decisión:** D-146
 **Documento frontend:** `05-frontend/features/personal-permisos.md`
 
 ## 1. Objetivo
@@ -18,21 +18,24 @@ Permitir que el CEO cree empleados, les asigne un rol y controle su acceso sin c
 - Revocar sesiones al desactivar.
 - Matriz de permisos por rol.
 
-## 3. Matriz propuesta
+## 3. Matriz aprobada (sin rol de cajero, D-145 y D-146)
 
-| Capacidad | Owner | Admin | Mesero | Cajero | Cocinero |
-|---|---|---|---|---|---|
-| Configurar restaurante | Sí | Delegado | No | No | No |
-| Gestionar plan | Sí | No | No | No | No |
-| Gestionar personal | Sí | Sí, sin owner | No | No | No |
-| Editar menú | Sí | Sí | No | No | No |
-| Gestionar mesas | Sí | Sí | Sí | No | No |
-| Crear pedidos | Sí | Sí | Sí | No | No |
-| Cambiar estado de cocina | Sí | Sí | Sí | No | Sí |
-| Registrar pago | Sí | Sí | No | Sí | No |
-| Gestionar reservas | Sí | Sí | Sí | No | No |
-| Ver datos de clientes | Sí | Sí | Limitado | Limitado | No |
-| Ver reportes | Sí | Sí | No | Limitado | No |
+| Capacidad | Owner | Admin | Mesero | Cocinero |
+|---|---|---|---|---|
+| Configurar restaurante | Sí | Delegado | No | No |
+| Gestionar plan | Sí | No | No | No |
+| Gestionar personal | Sí | Sí, sin owner | No | No |
+| Editar menú | Sí | Sí | No | No |
+| Gestionar mesas | Sí | Sí | Sí | No |
+| Crear pedidos | Sí | Sí | Sí | No |
+| Cambiar estado de cocina | Sí | Sí | Sí | Sí |
+| Generar cobro del pedido | Sí | Sí | Sí | No |
+| Consultar estado de pago | Sí | Sí | Sí | No |
+| Gestionar reservas | Sí | Sí | Sí | No |
+| Ver datos de clientes | Sí | Sí | Limitado | No |
+| Ver reportes | Sí | Sí | No | No |
+
+El pago se confirma por webhook de la pasarela del restaurante, no con una acción manual de caja.
 
 ## 4. Reglas de negocio
 
@@ -44,6 +47,7 @@ Permitir que el CEO cree empleados, les asigne un rol y controle su acceso sin c
 | RN-124 | Desactivar revoca sesiones y conserva historial. |
 | RN-125 | Los permisos no se heredan entre tenants. |
 | RN-126 | El cocinero no ve datos personales ni precios. |
+| RN-127 | No existe rol de cajero: Lixus no recibe dinero de los pedidos (D-145). |
 
 ## 5. API
 

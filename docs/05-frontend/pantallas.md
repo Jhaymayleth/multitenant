@@ -12,20 +12,22 @@
 | `/r/{slug}/menu` | Menú | PARCIAL | Productos publicados |
 | `/r/{slug}/reservas` | Reserva | PARCIAL | Disponibilidad |
 | `/r/{slug}/mesa/{token}` | Mesa y solicitudes | PARCIAL | Sesión QR |
+| `/r/{slug}/pedido/{id}/pagar` | Pago del pedido | NO INICIADO | Pasarela del restaurante |
 | `/r/{slug}/comprobante/{token}` | Comprobante | NO INICIADO | Pago |
 
 ## 2. Panel del CEO
 
 | Ruta | Pantalla | Estado | Datos |
 |---|---|---|---|
-| `/admin` | Resumen del día | PARCIAL | Pedidos, mesas, caja |
+| `/admin` | Resumen del día | PARCIAL | Pedidos, mesas y cobros |
 | `/admin/menu` | Menú y categorías | PARCIAL | CRUD |
 | `/admin/mesas` | Mesas y QR | PARCIAL | Mesas y sesiones |
 | `/admin/pedidos` | Pedidos y cocina | PARCIAL | Pedidos y estados |
-| `/admin/caja` | Caja | PARCIAL | Pagos y comprobantes |
+| `/admin/pedidos/cobros` | Historial de cobros | NO INICIADO | Pasarela del restaurante |
 | `/admin/reservas` | Reservas | NO INICIADO | Reservas |
 | `/admin/personal` | Personal y roles | NO INICIADO | Empleados |
 | `/admin/configuracion` | Página pública | PARCIAL | Marca y publicación |
+| `/admin/configuracion/cobro` | Pasarela del restaurante | NO INICIADO | Configuración del cobro |
 | `/admin/cuenta` | Plan y facturación | NO INICIADO | Suscripción |
 
 ## 3. Portal Lixus

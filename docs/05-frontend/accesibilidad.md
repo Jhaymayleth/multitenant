@@ -5,7 +5,7 @@
 **Dueño:** Ingeniería
 **Decisión:** D-131
 
-## 1. Compromiso propuesto
+## 1. Compromiso aprobado (D-131)
 
 WCAG 2.1 nivel AA en los flujos críticos:
 

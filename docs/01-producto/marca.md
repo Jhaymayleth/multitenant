@@ -13,6 +13,8 @@ No se inventa una historia del nombre ni un significado oficial hasta que el due
 
 ## 2. Tono
 
+Aprobado en D-132.
+
 - **Directo:** frases cortas, sin jerga técnica.
 - **Cercano:** habla como un colega que conoce el restaurante, no como un banco.
 - **Respetuoso:** no trata al restaurante como “usuario” ni al personal como “recurso”.
@@ -24,7 +26,7 @@ Ejemplos:
 |---|---|
 | “Optimiza tus procesos operativos” | “Ten el día de tu restaurante en orden” |
 | “Plataforma omnicanal” | “Mesa, mostrador y domicilio en un solo lugar” |
-| “Solución integral” | “Menú, pedidos, mesas y caja” |
+| “Solución integral” | “Menú, pedidos, mesas y cobro” |
 
 ## 3. Identidad visual (propuesta)
 
@@ -40,7 +42,7 @@ La paleta y el logotipo definitivos están por definir. No se publica una guía 
 
 - Dominio actual de producción: `lixus.coderhivex.com` (entorno de trabajo, no material comercial).
 - Dominio comercial definitivo: **POR DEFINIR**; debe ser propio de Lixus (D-130).
-- La página pública del restaurante usa una ruta dentro del dominio de Lixus en la versión inicial (`/r/{slug}`), salvo que se apruebe subdominio.
+- La página pública del restaurante usa una ruta dentro del dominio de Lixus (`/r/{slug}`). Aprobado en D-124; el subdominio queda como evolución.
 
 ## 5. Idiomas
 
@@ -50,7 +52,7 @@ La paleta y el logotipo definitivos están por definir. No se publica una guía 
 
 ## 6. Accesibilidad
 
-Compromiso aprobado: WCAG 2.1 AA en los flujos críticos (login, menú, pedido, caja, reserva y página pública), según D-131.
+Compromiso aprobado: WCAG 2.1 AA en los flujos críticos (login, menú, pedido, cobro, reserva y página pública), según D-131.
 
 Criterios mínimos:
 

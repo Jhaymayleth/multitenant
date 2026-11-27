@@ -1,15 +1,17 @@
 # Métricas
 
-**Estado:** Borrador
-**Última revisión:** 26 de noviembre de 2026
+**Estado:** Vigente (D-144)
+**Última revisión:** 27 de noviembre de 2026
 **Dueño:** Producto / Negocio
-**Decisión abierta:** PD-10
+**Decisión:** D-144
 
 ## 1. Métrica norte
 
 **Restaurantes que completan un ciclo operativo real cada semana:** un pedido registrado, preparado y cobrado, con la página pública activa.
 
 No se mide por número de pantallas ni por funciones lanzadas. Se mide por restaurantes que usan Lixus para operar.
+
+El marco de métricas está aprobado en D-144. Las metas numéricas se fijan cuando existan datos reales del piloto; mientras tanto, toda celda “POR DEFINIR” significa “sin dato”, no “objetivo acordado”.
 
 ## 2. Métricas de producto
 

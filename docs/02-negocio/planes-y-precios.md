@@ -6,11 +6,11 @@
 **Decisión abierta:** PD-07
 
 > Documento corporativo. Se genera también en `.docx` cuando se cierre el contenido.
-> **No hay precios aprobados.** Las cifras se escriben solo después de validarlas con clientes.
+> **No hay precios aprobados.** Las cifras se escriben solo después de validarlas con clientes. La estructura de tres planes está aprobada en D-139.
 
 ## 1. Estructura propuesta
 
-Tres planes, nombres provisionales:
+Tres planes aprobados en su forma, con nombres provisionales:
 
 | Capacidad | Básico | Pro | Plus |
 |---|---|---|---|
@@ -19,7 +19,7 @@ Tres planes, nombres provisionales:
 | Mesas y QR | Hasta un límite por definir | Hasta un límite por definir | Sin límite operativo razonable |
 | Pedidos y cocina | Sí | Sí | Sí |
 | Reservas | No | Sí | Sí |
-| Caja ligera y comprobantes | No | Sí | Sí |
+| Cobro por pasarela del restaurante y comprobantes | No | Sí | Sí |
 | Personal y roles | Hasta un límite por definir | Hasta un límite por definir | Hasta un límite por definir |
 | Reportes | Básicos | Operativos | Operativos + exportación |
 | Almacenamiento de imágenes | Límite por definir | Límite por definir | Límite por definir |
@@ -49,7 +49,7 @@ Los límites deben expresarse en lenguaje del restaurante (“hasta 20 mesas”)
 ## 4. Implementación
 
 - Onboarding estándar: incluido en el primer mes.
-- Migración de menú desde Excel o PDF: tarifa única POR DEFINIR.
+- Migración de menú desde Excel o PDF: tarifa única POR DEFINIR (se cobra según D-143).
 - Capacitación adicional: tarifa por sesión POR DEFINIR.
 - Integraciones a medida: cotización separada.
 
@@ -57,10 +57,10 @@ Los límites deben expresarse en lenguaje del restaurante (“hasta 20 mesas”)
 
 | Tema | Propuesta | Estado |
 |---|---|---|
-| Prueba | 14 días con onboarding asistido | POR DEFINIR |
-| Fin de prueba | Se bloquea la escritura, no se borran datos | POR DEFINIR |
-| Cancelación | Al final del periodo pagado | POR DEFINIR |
-| Reembolso | Solo por fallo atribuible a Lixus | POR DEFINIR |
+| Prueba | Sin prueba gratuita; se paga desde el primer día (D-141) | APROBADA |
+| Fin de prueba | No aplica | APROBADA |
+| Cancelación | Al final del periodo pagado (D-142) | APROBADA |
+| Reembolso | Solo por fallo atribuible a Lixus (D-142) | APROBADA |
 | Reactivación | Inmediata al pagar | POR DEFINIR |
 | Datos al cancelar | Conservación y exportación según contrato | POR DEFINIR |
 

@@ -7,9 +7,9 @@
 
 ## 1. Estrategia de entrada
 
-Arrancar en **una ciudad y un segmento**, con venta directa y onboarding asistido. No se abre autoservicio ni se persigue volumen antes de probar que un restaurante renueva.
+Arrancar en **Colombia** (D-135), en **Barranquilla** (D-136) y en **un segmento**, con venta directa y onboarding asistido. No se abre autoservicio ni se persigue volumen antes de probar que un restaurante renueva.
 
-Segmento inicial propuesto: restaurantes independientes de una sede, con operación de mesa y domicilio, entre 5 y 30 mesas.
+Segmento inicial aprobado (D-137): restaurantes independientes de una sede, con 5–30 mesas, 3–20 empleados y operación de mesa y domicilio.
 
 ## 2. Canales
 
@@ -27,7 +27,7 @@ Segmento inicial propuesto: restaurantes independientes de una sede, con operaci
 1. **Contacto:** referido, evento o mensaje directo.
 2. **Descubrimiento (20 min):** cómo opera hoy, qué duele, quién decide.
 3. **Demostración (30 min):** un día del restaurante, no un tour de funciones.
-4. **Piloto:** un servicio real con acompañamiento.
+4. **Piloto:** un servicio real con acompañamiento y cobro desde el primer día.
 5. **Propuesta:** alcance, precio, fecha y responsabilidades.
 6. **Contrato:** términos, privacidad y acuerdo de servicio.
 7. **Onboarding:** carga de menú, mesas, personal y publicación.
@@ -40,7 +40,7 @@ Segmento inicial propuesto: restaurantes independientes de una sede, con operaci
 | Dueño | “Vas a ver tu restaurante ordenado y tu página en línea sin contratar un sistema enorme.” |
 | Administrador | “El equipo va a seguir un solo proceso y tú vas a ver qué falta.” |
 | Mesero | “Vas a tomar el pedido una vez y cocina lo va a ver.” |
-| Cajero | “Vas a cobrar la cuenta correcta sin recalcular.” |
+| Cobro | “El cliente paga en la pasarela del restaurante y tú ves el pedido como pagado.” |
 | Contador | “Los datos se pueden exportar y no se mezclan con otros restaurantes.” |
 
 ## 5. Plan de 90 días
@@ -71,4 +71,4 @@ Las metas numéricas están POR DEFINIR hasta tener datos del primer ciclo.
 - No se vende una función que no existe.
 - No se promete una fecha sin capacidad reservada.
 - No se acepta un cliente que exija un desarrollo a medida sin cotización separada.
-- No se descuenta para “probar”; se prueba con alcance y fecha.
+- No se descuenta para “probar” (D-143); se prueba con alcance y fecha.

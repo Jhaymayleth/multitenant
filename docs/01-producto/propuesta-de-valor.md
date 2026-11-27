@@ -12,7 +12,7 @@
 
 ### 2.1 Orden operativo
 
-Menú, mesas, pedidos, cocina y caja comparten la misma información. El equipo deja de reconstruir lo que pasó y empieza a ver lo que está pasando.
+Menú, mesas, pedidos, cocina y cobro comparten la misma información. El equipo deja de reconstruir lo que pasó y empieza a ver lo que está pasando.
 
 ### 2.2 Presencia digital incluida
 
@@ -34,7 +34,7 @@ Suscripción mensual por restaurante, sin comisión por pedido ni cobros escondi
 
 | Alternativa | Lo que falla | Lo que Lixus aporta |
 |---|---|---|
-| Cuaderno, Excel y WhatsApp | No hay una sola verdad; se pierde información | Datos compartidos entre operación y caja |
+| Cuaderno, Excel y WhatsApp | No hay una sola verdad; se pierde información | Datos compartidos entre operación y cobro |
 | POS empresarial | Costoso, complejo, pensado para cadenas | Producto enfocado en una sede independiente |
 | Plataforma de reservas | Solo cubre reservas | Operación completa y página pública |
 | Constructor web | Página bonita sin operación | Página conectada al menú y al restaurante |
@@ -46,7 +46,7 @@ El valor debe demostrarse con hechos observables, no con adjetivos:
 
 - El restaurante publica su menú y su página en menos de 48 horas.
 - El mesero registra un pedido y cocina lo ve sin llamadas.
-- La caja cobra el pedido correcto sin recalcular.
+- El cobro del pedido se confirma y la mesa queda libre sin recalcular.
 - El dueño consulta el estado del día desde el panel.
 - El cliente reserva o pide sin crear una cuenta en otro sistema.
 
@@ -62,7 +62,7 @@ El valor debe demostrarse con hechos observables, no con adjetivos:
 
 ## 6. Lo que no prometemos
 
-- Procesar pagos con tarjeta en la versión inicial.
+- Manejar efectivo, arqueo ni dinero de los pedidos.
 - Facturación fiscal.
 - Inventario o control de stock.
 - Reparto con flota propia.

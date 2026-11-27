@@ -56,7 +56,7 @@ No se usan datos para publicidad de terceros ni se venden.
 - Interés legítimo en seguridad y mejora.
 - Obligación legal para facturación y conservación.
 
-La base concreta se valida con el abogado según la jurisdicción.
+La base concreta se valida con abogado cuando se cierre la jurisdicción (PD-14). Toda la parte legal está diferida; ver `README.md` de esta carpeta.
 
 ## 6. Conservación
 

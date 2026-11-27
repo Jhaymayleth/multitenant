@@ -4,6 +4,8 @@ Lixus es una plataforma SaaS multitenant para restaurantes independientes. Cada 
 
 Este directorio es la fuente de verdad del producto. El código, la operación y la documentación comercial deben poder leerse sin depender de conversaciones antiguas.
 
+**Fase actual:** MVP de la aplicación (D-151). No hay operación de venta activa; la documentación de negocio, operación y legal es planificación futura.
+
 ## Por dónde empezar
 
 | Si eres... | Empieza por |
@@ -12,14 +14,14 @@ Este directorio es la fuente de verdad del producto. El código, la operación y
 | Desarrollador nuevo | `00-gobierno/indice.md`, `03-arquitectura/sistema.md`, `04-backend/dominios.md`, `05-frontend/areas.md` |
 | Implementando una feature | `04-backend/features/` y `05-frontend/features/` del mismo nombre |
 | Operando producción | `06-infra-ops/despliegue.md`, `06-infra-ops/incidentes.md`, `06-infra-ops/backups.md` |
-| Revisando riesgo legal | `08-legal/` (todos son borradores) |
+| Revisando riesgo legal | `08-legal/README.md` (todo está diferido y pendiente de abogado) |
 
 ## Reglas de lectura
 
 1. **Una decisión aprobada manda sobre cualquier documento de área.** El registro está en `00-gobierno/decisiones.md`.
 2. **Lo que no está decidido vive en** `00-gobierno/decisiones-por-definir.md`, no en el código ni en un documento de área como si fuera un hecho.
 3. **El estado real manda sobre la intención.** `00-gobierno/estado-producto.md` describe qué existe hoy, no qué se planeó.
-4. **Los documentos legales son borradores** y requieren revisión de un abogado en la jurisdicción que se defina.
+4. **La parte legal está diferida** hasta que la aplicación funcione; los documentos son borradores y requieren abogado.
 
 ## Estado de la documentación
 

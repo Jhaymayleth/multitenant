@@ -30,7 +30,7 @@ Que el CEO vea quién trabaja en el restaurante, qué rol tiene y pueda dar o qu
 ### Invitar
 
 1. El CEO escribe el correo.
-2. Elige un rol.
+2. Elige un rol entre administrador, mesero y cocinero; no existe el rol de cajero (D-145).
 3. El backend crea la membresía y envía el código.
 4. El empleado verifica y entra.
 
@@ -47,7 +47,7 @@ Que el CEO vea quién trabaja en el restaurante, qué rol tiene y pueda dar o qu
 - [ ] El rol cliente no aparece como opción de empleado.
 - [ ] Desactivar pide confirmación.
 - [ ] El empleado desactivado no puede entrar.
-- [ ] La interfaz respeta la matriz de permisos.
+- [ ] La interfaz respeta la matriz de permisos y no ofrece el rol de cajero (D-145).
 
 ## 6. Estado actual
 

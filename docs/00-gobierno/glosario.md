@@ -10,7 +10,7 @@
 | **Schema `platform`** | Espacio global: usuarios, tenants, membresías, planes, suscripciones, verificación, idempotencia global y auditoría. |
 | **Schema del tenant** | Espacio exclusivo del restaurante: menú, personal, mesas, pedidos, reservas, pagos y configuración. |
 | **CEO del restaurante** | Persona que contrata el servicio y responde por el negocio. Es el comprador y el rol `owner`. |
-| **Personal** | Empleados del restaurante con roles operativos: administrador, mesero, cajero, cocinero. |
+| **Personal** | Empleados del restaurante con roles operativos: administrador, mesero y cocinero. No hay rol de cajero (D-145). |
 | **Cliente registrado** | Persona con cuenta en un restaurante para reservar, pedir a domicilio o descargar comprobantes. |
 | **Cliente anónimo de mesa** | Persona que escanea el QR de una mesa y envía solicitudes sin crear cuenta. |
 | **Visitante** | Persona que consulta la página pública o el menú sin cuenta. |
@@ -23,7 +23,7 @@
 | **Rate limiting** | Límite de peticiones por usuario, tenant o IP para evitar abuso. |
 | **Webhook** | Evento HTTP que un proveedor externo envía a Lixus, firmado para verificar origen e integridad. |
 | **Comprobante** | Documento simple de compra con numeración por tenant y token temporal. No tiene validez fiscal. |
-| **Caja ligera** | Registro de pago y comprobante; no es un POS con turnos, arqueo o inventario. |
+| **Cobro de pedidos** | Pago del total con la pasarela del restaurante; Lixus solo confirma y emite comprobante. No es caja ni POS (D-145). |
 | **SSG / ISR** | Generación estática y regeneración incremental para páginas públicas. |
 | **CSR** | Renderizado en el cliente para paneles privados. |
 | **RLS** | Row Level Security de PostgreSQL. Defensa adicional, no sustituto del schema por tenant. |

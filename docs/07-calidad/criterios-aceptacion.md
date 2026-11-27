@@ -25,7 +25,7 @@ Una feature está terminada cuando:
 - [ ] El CEO carga menú, mesas y personal.
 - [ ] El mesero registra un pedido con total correcto.
 - [ ] Cocina ve y actualiza el pedido.
-- [ ] El cajero cobra, libera la mesa y emite comprobante.
+- [ ] El cobro se confirma por webhook, libera la mesa y emite comprobante.
 - [ ] El cliente consulta la página y reserva.
 - [ ] La sesión es httpOnly, Secure y con CSRF.
 - [ ] Hay rate limiting en login y escrituras.

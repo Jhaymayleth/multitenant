@@ -20,20 +20,20 @@ Estados: `PROPUESTA`, `APROBADA`, `POR DEFINIR`, `SUSTITUIDA`.
 | D-108 | 2026-11-26 | Producto | Cada tenant tiene página pública con plantilla común y personalización de marca, textos, horarios y menú. | Da presencia digital sin construir un sitio a medida. | APROBADA | 05 |
 | D-109 | 2026-11-26 | Producto | No hay directorio público ni publicidad cruzada entre tenants. | Protege la privacidad comercial. | APROBADA | 01, 03 |
 | D-110 | 2026-11-26 | Producto | El mesero registra pedidos de mesa; el cliente anónimo solo envía solicitudes por QR; el cliente registrado reserva y pide a domicilio. | Refleja la operación real del restaurante. | APROBADA | 04, 05 |
-| D-111 | 2026-11-26 | Producto | Caja ligera: registra pago, emite comprobante y QR de descarga; no es POS. | Reduce alcance y evita competir con sistemas contables. | APROBADA | 04, 05 |
+| D-111 | 2026-11-26 | Producto | Caja ligera: registra pago, emite comprobante y QR de descarga; no es POS. | Reduce alcance y evita competir con sistemas contables. | SUSTITUIDA (D-145) | 04, 05 |
 | D-112 | 2026-11-26 | Seguridad | Lixus no accede a datos operativos del restaurante; desactivar un tenant no borra sus datos. | Confianza comercial y continuidad. | APROBADA | 03, 06 |
 | D-113 | 2026-11-26 | Producto | La versión inicial no calcula impuestos, propinas ni descuentos. | El restaurante los maneja fuera del sistema. | APROBADA | 04 |
-| D-114 | 2026-11-26 | Pagos | Lixus no procesa dinero en la versión inicial; registra el pago y deja la pasarela para una integración posterior. | Evita PCI y cuentas de comercio antes de validar el producto. | PROPUESTA | 04, 08 |
+| D-114 | 2026-11-26 | Pagos | Lixus no procesa dinero en la versión inicial; registra el pago y deja la pasarela para una integración posterior. | Evita PCI y cuentas de comercio antes de validar el producto. | SUSTITUIDA (D-145) | 04, 08 |
 | D-115 | 2026-11-26 | Infraestructura | Producción en AWS con Docker Compose, Nginx, TLS Let's Encrypt y PostgreSQL RDS. | Ya está operativo y es reproducible. | APROBADA | 06 |
 | D-116 | 2026-11-26 | Infraestructura | `main` despliega; `develop` integra. | Evita publicar trabajo a medias. | APROBADA | 06 |
 | D-117 | 2026-11-26 | Seguridad | `/platform/*` se protege con `X-Platform-Admin-Key` como medida interina; el destino es JWT con rol Lixus y auditoría por usuario. | Cierra el acceso público hoy sin bloquear la operación. | APROBADA (interina) | 03, 06 |
 | D-118 | 2026-11-26 | Documentación | Documentación en ocho áreas, un tema por archivo y features espejo backend/frontend. | Hace la documentación navegable y mantenible. | APROBADA | Todos |
 | D-119 | 2026-11-26 | Documentación | El registro nuevo empieza en `D-101`; `D-001` a `D-076` son referencia histórica. | Evita colisiones y preserva trazabilidad. | APROBADA | 00 |
 | D-120 | 2026-11-26 | Documentación | Se prohíbe el lenguaje académico en la documentación vigente. | La documentación debe servir para vender y operar. | APROBADA | Todos |
-| D-121 | 2026-11-26 | Producto | La versión que se vende incluye onboarding, menú, personal, mesas/QR, pedidos, reservas, caja ligera y página pública; IA y automatización quedan fuera. | Es el mínimo que resuelve la operación diaria y permite cobrar. | PROPUESTA | 01, 04, 05 |
-| D-122 | 2026-11-26 | Producto | Un tenant equivale a un local en la versión inicial. | Simplifica mesas, menú y reportes; las cadenas se atienden después. | PROPUESTA | 01, 04 |
+| D-121 | 2026-11-26 | Producto | La versión que se vende incluye onboarding, menú, personal, mesas/QR, pedidos, reservas, caja ligera y página pública; IA y automatización quedan fuera. | Es el mínimo que resuelve la operación diaria y permite cobrar. | APROBADA | 01, 04, 05 |
+| D-122 | 2026-11-26 | Producto | Un tenant equivale a un local en la versión inicial. | Simplifica mesas, menú y reportes; las cadenas se atienden después. | APROBADA | 01, 04 |
 | D-123 | 2026-11-26 | Producto | La interfaz y la documentación comercial están en español en la versión inicial. | El mercado objetivo inicial es hispanohablante. | APROBADA | 01, 05 |
-| D-124 | 2026-11-26 | Producto | URL pública por ruta `/r/{slug}` en la versión inicial; subdominio propio queda como evolución. | Producción ya usa un dominio único y no exige DNS comodín. | PROPUESTA | 03, 05 |
+| D-124 | 2026-11-26 | Producto | URL pública por ruta `/r/{slug}` en la versión inicial; subdominio propio queda como evolución. | Producción ya usa un dominio único y no exige DNS comodín. | APROBADA | 03, 05 |
 | D-125 | 2026-11-26 | Calidad | Cada feature tiene criterio de aceptación verificable y estado explícito. | Evita declarar terminado lo que no funciona. | APROBADA | 07, features |
 | D-126 | 2026-11-26 | Operación | El soporte de la versión inicial es por canal directo con horario definido; el SLA está por definir. | Se puede operar sin prometer lo que aún no se mide. | PROPUESTA | 06 |
 | D-127 | 2026-11-26 | Legal | Todo documento legal se entrega como borrador y requiere revisión de un abogado en la jurisdicción definida. | Lixus no sustituye asesoría jurídica. | APROBADA | 08 |
@@ -41,6 +41,31 @@ Estados: `PROPUESTA`, `APROBADA`, `POR DEFINIR`, `SUSTITUIDA`.
 | D-129 | 2026-11-26 | Identidad | Se aprueban como definitivas la misión «ordenar la operación y la presencia digital del restaurante», la visión «ser el sistema operativo del restaurante independiente en Latinoamérica» y la promesa «Tu restaurante, en orden y en línea». | El dueño validó la identidad; de ella dependen el tono comercial, la venta y el onboarding. | APROBADA | 01 |
 | D-130 | 2026-11-26 | Marca | Se mantiene «Lixus» como nombre comercial y se usará un dominio propio; el dominio exacto se define antes del lanzamiento comercial. | Un dominio de proveedor no transmite marca ni sostiene correos y página pública. | APROBADA | 01 |
 | D-131 | 2026-11-26 | Experiencia | Se adopta WCAG 2.1 AA en los flujos críticos: login, menú, pedido, caja, reserva y página pública. | Es un estándar razonable, verificable y vendible sin encarecer el producto. | APROBADA | 01, 05 |
+| D-132 | 2026-11-26 | Marca | El tono de Lixus es directo y cercano: frases cortas, lenguaje de restaurante y sin jerga técnica. | El dueño y el personal deben entender el producto sin capacitación extensa. | APROBADA | 01, 05 |
+| D-133 | 2026-11-26 | Identidad | Se confirman los límites: Lixus no es un POS, marketplace, reparto propio, contabilidad ni IA que opere sola. | Evita prometer de más y protege el foco del primer cliente. | APROBADA | 01 |
+| D-134 | 2026-11-26 | Identidad | La promesa se cumple cuando un restaurante opera un servicio completo —pedido, cocina, cobro y página— sin volver al papel ni a Excel. | Da una prueba verificable para venta, onboarding y métricas. | APROBADA | 01, 07 |
+| D-135 | 2026-11-27 | Mercado | El arranque comercial es en Colombia, con una ciudad piloto que se define antes del lanzamiento. | El dueño fijó el país inicial; define moneda, jurisdicción y alcance de la primera venta. | APROBADA | 02, 08 |
+| D-136 | 2026-11-27 | Mercado | La ciudad piloto es Barranquilla. | El dueño está ubicado allí y lo considera un mercado grande; facilita entrevistas, piloto y soporte presencial. | APROBADA | 02 |
+| D-137 | 2026-11-27 | Mercado | El cliente ideal es un restaurante independiente de una sede, con 5–30 mesas, 3–20 empleados y operación de mesa y domicilio. | Define límites del plan, guion de venta y carga de onboarding. | APROBADA | 01, 02 |
+| D-138 | 2026-11-27 | Mercado | El competidor principal de Lixus en Barranquilla es la operación con papel, Excel y WhatsApp, seguida de un POS local. | La venta se compara contra errores y tiempo perdido; no contra un software concreto. | APROBADA | 02 |
+| D-139 | 2026-11-27 | Negocio | La estructura comercial es de tres planes; las cifras, la moneda y el ciclo se validan con entrevistas antes de publicarse. | Da un marco de venta sin inventar precios ni límites. | APROBADA | 02 |
+| D-140 | 2026-11-27 | Negocio | El cobro de la suscripción se hace con pasarela de suscripción desde el inicio; el proveedor concreto y la facturación electrónica se definen con abogado y contador. | El dueño eligió cobro recurrente frente a transferencia manual. | APROBADA | 02, 08 |
+| D-141 | 2026-11-27 | Negocio | No hay prueba gratuita: el restaurante paga desde el primer día con implantación acompañada. | El dueño prefirió evitar un periodo sin ingreso y sostener el onboarding como parte de la venta. | APROBADA | 02, 08 |
+| D-142 | 2026-11-27 | Negocio | La cancelación surte efecto al final del periodo pagado; no hay reembolso proporcional salvo fallo atribuible a Lixus. | Da claridad contractual antes del primer cobro. | APROBADA | 02, 08 |
+| D-143 | 2026-11-27 | Negocio | No hay descuento de lanzamiento; la implementación se cobra solo cuando hay migración de datos. | Evita fijar un precio bajo de entrada y cobra el trabajo real de carga. | APROBADA | 02 |
+| D-144 | 2026-11-27 | Negocio | Se adopta un marco de métricas de producto, negocio y soporte sin metas numéricas hasta tener datos reales del piloto. | Evita decisiones basadas en cifras inventadas. | APROBADA | 02, 06 |
+| D-145 | 2026-11-27 | Pagos | Lixus no gestiona caja ni recibe dinero de los pedidos: no hay rol de cajero. El total del pedido se cobra con la pasarela propia del restaurante y el dinero llega a su cuenta; Lixus genera el cobro, recibe el webhook y marca el pedido pagado. La suscripción se cobra con una pasarela separada (D-140). | El dueño aclaró que Lixus ordena la operación; el dinero de la venta pertenece al restaurante. | APROBADA | 01, 02, 03, 04, 05, 08 |
+| D-146 | 2026-11-27 | Producto | Se aprueba la matriz de permisos con cuatro roles: owner, admin, mesero y cocinero, sin rol de cajero. | Cierra autorización en backend y guards del frontend. | APROBADA | 03, 04, 05 |
+| D-147 | 2026-11-27 | Producto | El domicilio se opera con zonas y tarifa fija definidas por el restaurante, entrega con personal propio y cobro por su pasarela (D-145). | El dueño eligió mantener la operación y el dinero dentro del restaurante. | APROBADA | 01, 04, 05 |
+| D-149 | 2026-11-27 | Operación | El alta de un restaurante sigue: formulario, llamada de 20 minutos, documentos del negocio, revisión manual y acceso del CEO en 48 horas. | Define tiempo hasta la primera operación y mantiene la verificación gestionada (D-107). | APROBADA | 02, 06 |
+| D-150 | 2026-11-27 | Legal | Se aplica la Ley 1581 de Colombia y habeas data como régimen provisional de protección de datos, pendiente de confirmación por abogado. | Cancelada a solicitud del dueño: la parte legal se difiere hasta que la aplicación funcione. | CANCELADA | 08 |
+| D-151 | 2026-11-27 | Dirección | La prioridad actual es terminar el MVP de la aplicación. La operación comercial, el soporte formal y la parte legal quedan diferidos; hoy no hay venta activa. | El proyecto es personal y se ofrecerá a restaurantes en el futuro; no se decide nada de operación antes de tener un producto funcional. | APROBADA | 00, 01, 02, 06, 08 |
+
+> D-145 sustituye a D-111, D-114 y la parte de “caja ligera” de D-121 en todo lo relativo al cobro de pedidos. D-128 se mantiene para pagos de pedidos y se matiza con D-140 para la suscripción.
+
+> **Parte legal diferida:** PD-14, PD-15, PD-16, PD-17 y PD-28 quedan POR DEFINIR. D-150 fue cancelada a solicitud del dueño. No se publica ningún documento legal como vigente hasta revisión de abogado y de que la aplicación funcione.
+
+> **Foco actual (D-151):** solo MVP. Las decisiones de negocio, operación y legales ya aprobadas son planificación futura, no una operación en marcha. Las preguntas abiertas de esas áreas quedan diferidas.
 
 ## Decisiones que no se reabren sin evidencia nueva
 
@@ -51,5 +76,5 @@ Estados: `PROPUESTA`, `APROBADA`, `POR DEFINIR`, `SUSTITUIDA`.
 - Alta gestionada por Lixus (D-107).
 - Sin directorio de tenants (D-109).
 - Canales de pedido (D-110).
-- Caja ligera (D-111).
+- Cobro de pedidos por pasarela propia del restaurante (D-145).
 - Lixus sin acceso operativo (D-112).

@@ -29,6 +29,7 @@ Cobrar el plan contratado por cada restaurante y reflejar el estado de la suscri
 | RN-194 | La activación inicial es manual en la versión inicial. |
 | RN-195 | Un cambio de plan respeta el periodo pagado. |
 | RN-196 | No se elimina un tenant por impago sin proceso y aviso. |
+| RN-197 | La suscripción se cobra con la pasarela de Lixus, separada de la pasarela de pedidos del restaurante (D-140, D-145). |
 
 ## 4. API
 

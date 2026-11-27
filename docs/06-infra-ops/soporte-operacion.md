@@ -15,6 +15,8 @@ Solicitud → Descubrimiento → Alta → Onboarding → Operación → Renovaci
 
 ## 2. Alta
 
+El proceso aprobado es formulario, llamada de 20 minutos, documentos del negocio, revisión manual y acceso del CEO en 48 horas (D-149).
+
 1. Recibir solicitud.
 2. Llamada de descubrimiento (20 min).
 3. Verificar negocio y datos.

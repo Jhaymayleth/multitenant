@@ -82,4 +82,4 @@ Se limita a lo pactado en el contrato principal y a la ley aplicable.
 
 ## 13. Ley
 
-[JURISDICCIÓN].
+[JURISDICCIÓN]. Pendiente: ver `README.md` de esta carpeta.

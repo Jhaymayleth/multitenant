@@ -9,7 +9,7 @@
 
 | Área | Ruta base | Usuario | Objetivo |
 |---|---|---|---|
-| Web pública | `/r/{slug}` (propuesto) | Visitante y comensal | Ver menú, información y reservar |
+| Web pública | `/r/{slug}` (D-124) | Visitante y comensal | Ver menú, información y reservar |
 | Panel del CEO | `/admin` | CEO y personal | Operar el restaurante |
 | Portal Lixus | `/portal` y `/solicita` | Equipo Lixus y solicitante | Administrar la plataforma y captar |
 
@@ -23,7 +23,6 @@ frontend/src/app/
 │   ├── menu
 │   ├── mesas
 │   ├── pedidos
-│   ├── caja
 │   └── configuracion
 ├── (lixus)/solicita
 ├── (lixus)/portal
@@ -41,7 +40,7 @@ frontend/src/app/
 2. **Pocos toques:** el mesero registra un pedido con el mínimo de pasos.
 3. **Estado visible:** mesa, pedido y pago se entienden de un vistazo.
 4. **Errores claros:** qué pasó y qué hacer.
-5. **Móvil primero en operación:** el mesero y el cajero usan teléfono o tablet.
+5. **Móvil primero en operación:** el mesero y el personal de cocina usan teléfono o tablet.
 6. **Español:** toda la interfaz, salvo decisión contraria.
 
 ## 4. Autenticación en el frontend

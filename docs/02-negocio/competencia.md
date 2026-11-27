@@ -1,13 +1,13 @@
 # Competencia
 
 **Estado:** Borrador
-**Última revisión:** 26 de noviembre de 2026
+**Última revisión:** 27 de noviembre de 2026
 **Dueño:** Producto
-**Decisión abierta:** PD-05
+**Decisión:** D-138
 
 ## 1. Cómo se compite hoy
 
-El restaurante independiente no elige solo entre software. Compite contra varias formas de resolver el mismo problema:
+El restaurante independiente no elige solo entre software. Compite contra varias formas de resolver el mismo problema. Según D-138, el rival principal en Barranquilla es la operación con papel, Excel y WhatsApp, seguida de un POS local; las demás categorías son secundarias en la venta inicial.
 
 | Categoría | Ejemplos de solución | Fortaleza | Debilidad para el segmento |
 |---|---|---|---|
@@ -29,7 +29,7 @@ Los nombres concretos, precios y cuota de mercado están **POR DEFINIR**. No se 
 | Menú y página pública | Incluidos | POR DEFINIR | POR DEFINIR | POR DEFINIR |
 | Pedidos de mesa | Sí | POR DEFINIR | POR DEFINIR | POR DEFINIR |
 | Reservas | Sí | POR DEFINIR | POR DEFINIR | POR DEFINIR |
-| Caja ligera | Sí | POR DEFINIR | POR DEFINIR | POR DEFINIR |
+| Cobro por pasarela del restaurante | Sí | POR DEFINIR | POR DEFINIR | POR DEFINIR |
 | Aislamiento de datos | Schema por tenant | POR DEFINIR | POR DEFINIR | POR DEFINIR |
 | Soporte en español | Sí | POR DEFINIR | POR DEFINIR | POR DEFINIR |
 
@@ -43,7 +43,7 @@ Los nombres concretos, precios y cuota de mercado están **POR DEFINIR**. No se 
 
 ## 4. Qué no se sabe todavía
 
-- Quién es el competidor real en la ciudad de arranque.
+- Qué POS local usan los restaurantes entrevistados y cuánto pagan.
 - Cuánto paga hoy el restaurante por sus herramientas.
 - Qué funciones usa de verdad y cuáles abandonó.
 - Si el dueño compara Lixus con un POS, con una web o con “no hacer nada”.

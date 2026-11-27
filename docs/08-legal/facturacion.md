@@ -18,6 +18,7 @@
 - Mensual por defecto.
 - Anual con descuento, si se aprueba.
 - Cobro anticipado.
+- El cobro se hace por pasarela de suscripción (D-140); el proveedor está por definir.
 - La fecha de corte se fija al contratar.
 
 ## 3. Facturación
@@ -31,13 +32,14 @@
 
 - Transferencia bancaria.
 - Pago electrónico local.
-- Pasarela de suscripción: [POR DEFINIR].
+- Pasarela de suscripción de Lixus (D-140; proveedor POR DEFINIR).
+- Los pedidos se cobran con la pasarela del restaurante; Lixus no recibe ese dinero (D-145).
 - No se almacenan datos de tarjeta.
 
 ## 5. Impuestos
 
 - Se aplican los impuestos de la jurisdicción.
-- Lixus no actúa como asesor fiscal del restaurante.
+- Lixus factura la suscripción al restaurante; el restaurante factura al comensal. Lixus no actúa como asesor fiscal del restaurante.
 - El restaurante es responsable de sus propios impuestos y de su facturación a clientes.
 
 ## 6. Mora

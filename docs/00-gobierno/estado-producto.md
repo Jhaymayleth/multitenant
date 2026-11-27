@@ -10,6 +10,8 @@ Este documento describe lo que existe hoy en el repositorio y en producción. No
 
 Lixus tiene un núcleo multitenant real y un despliegue productivo con HTTPS. El producto visible está en construcción: el frontend aún no consume la API y varios módulos del backend son parciales. La prioridad comercial no es añadir módulos, sino cerrar el flujo que permite a un restaurante operar y pagar.
 
+**Foco actual (D-151):** el proyecto está en fase MVP y no tiene operación de venta activa. Todo lo relacionado con negocio, soporte y legal es planificación futura; no debe leerse como una actividad en marcha.
+
 ## 2. Estado por área
 
 | Área | Estado | Qué existe | Qué falta para considerarla terminada |
@@ -22,7 +24,7 @@ Lixus tiene un núcleo multitenant real y un despliegue productivo con HTTPS. El
 | Mesas y QR | PARCIAL | Listar y crear mesas con token | Sesión QR real, solicitudes persistidas, estados de mesa |
 | Pedidos | PARCIAL | Crear, listar y ver pedidos | Líneas, snapshot de precio, total en servidor, cambio de estado, cocina |
 | Reservas | PARCIAL | Crear y listar reservas | Disponibilidad, solapamientos, estados, no-show |
-| Caja y comprobantes | NO INICIADO | Registro de pago y endpoints base | Confirmar pago, liberar mesa, comprobante, QR de descarga |
+| Cobro de pedidos y comprobantes | NO INICIADO | Endpoints base de pago | Pasarela por tenant, webhook firmado, liberar mesa, comprobante |
 | Página pública | PARCIAL | Configuración y menú por slug | Publicar, branding editable, reservas y mesa conectadas |
 | Personal | PARCIAL | Listar y pre-registrar perfiles | Usuario global, membresía, invitación, roles y revocación |
 | Suscripciones | NO INICIADO | Modelos y catálogo de planes | Cobro, facturación, vencimiento y reactivación |
@@ -41,11 +43,12 @@ Lixus tiene un núcleo multitenant real y un despliegue productivo con HTTPS. El
 - No hay pasarela de pagos.
 - No hay IA.
 - El frontend no llama a la API.
+- No hay decisiones legales cerradas: jurisdicción, datos, retención y contratos están diferidos.
 - El comprobante y la sesión QR son stubs.
 
 ## 4. Implicación comercial
 
-Se puede vender una implantación acompañada y un producto en evolución, pero no se puede prometer autoservicio, cobro automático ni pagos en línea. El primer cliente debe entrar con un alcance cerrado, onboarding asistido y una fecha de entrega por escrito.
+Se puede vender una implantación acompañada y un producto en evolución, pero no se puede prometer autoservicio ni cobro automático de pedidos; las pasarelas están pendientes. Hoy, según D-151, **no se vende**: esta sección describe cómo se venderá cuando el MVP funcione. El primer cliente debe entrar con un alcance cerrado, onboarding asistido y una fecha de entrega por escrito.
 
 ## 5. Evidencia
 

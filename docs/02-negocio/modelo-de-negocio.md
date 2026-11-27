@@ -66,12 +66,12 @@ Detalle en `02-negocio/planes-y-precios.md`.
 
 | Tema | Propuesta | Estado |
 |---|---|---|
-| Prueba | 14 días con acompañamiento | POR DEFINIR |
+| Prueba | Sin prueba gratuita; implantación acompañada desde el primer día (D-141) | APROBADA |
 | Cobro | Mensual; anual con descuento a definir | POR DEFINIR |
-| Cancelación | Al final del periodo contratado | POR DEFINIR |
-| Reembolso | Solo por fallo atribuible a Lixus | POR DEFINIR |
+| Cancelación | Al final del periodo contratado (D-142) | APROBADA |
+| Reembolso | Solo por fallo atribuible a Lixus (D-142) | APROBADA |
 | Impuestos | Facturación local según jurisdicción | POR DEFINIR |
-| Descuento de lanzamiento | No descontar; cobrar implementación si hay migración | POR DEFINIR |
+| Descuento de lanzamiento | No se aplica (D-143) | APROBADA |
 
 ## 7. Qué tiene que ser verdad
 

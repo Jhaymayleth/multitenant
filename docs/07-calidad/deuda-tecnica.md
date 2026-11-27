@@ -11,14 +11,14 @@ Prioridad: **P0** bloquea vender u operar; **P1** afecta calidad o seguridad; **
 | RT-01 | Frontend sin conexión a la API | Sin `fetch`, sin `lib/api.ts` | No hay producto visible | P0 |
 | RT-02 | Pedidos sin líneas ni total | `orders/service.py` crea `total_cents=0` | No se puede cobrar | P0 |
 | RT-03 | Rate limiting ausente | Solo variables de configuración | Abuso y fuerza bruta | P0 |
-| RT-04 | Idempotencia incompleta | Solo alta de tenant | Duplicados en pedidos y pagos | P0 |
+| RT-04 | Idempotencia incompleta | Solo alta de tenant | Duplicados en pedidos y cobros | P0 |
 | RT-05 | Sesión sin `Secure` | `auth/router.py` | Riesgo en producción | P0 |
 | RT-06 | Sin CSRF | No hay implementación | Escrituras cruzadas | P0 |
 | RT-07 | Sin revocación de sesión | Logout solo borra cookie | Empleado desactivado conserva token | P1 |
 | RT-08 | `switch-tenant` stub | No emite token | No se puede cambiar de restaurante | P1 |
 | RT-09 | `/auth/me` genérico | Nombre hardcodeado | UI incorrecta | P1 |
 | RT-10 | Personal huérfano | `user_id` aleatorio | Empleado no puede entrar | P1 |
-| RT-11 | Pagos no confirman | Endpoint stub | No se libera mesa | P1 |
+| RT-11 | Cobros no confirman | Endpoint stub | No se libera mesa | P1 |
 | RT-12 | Comprobante siempre 404 | Endpoint stub | No hay comprobante | P1 |
 | RT-13 | QR sin sesión real | Endpoint devuelve mensaje | No hay solicitudes | P1 |
 | RT-14 | Sitio público no publica | `is_published` nunca cambia | Página siempre 404 | P1 |

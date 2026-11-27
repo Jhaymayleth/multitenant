@@ -7,7 +7,7 @@
 
 ## 1. Objetivo
 
-Registrar lo que el cliente pidió, calcular el total correcto y que cocina y caja trabajen sobre la misma información.
+Registrar lo que el cliente pidió, calcular el total correcto y que cocina y cobro trabajen sobre la misma información.
 
 ## 2. Alcance
 
@@ -15,7 +15,7 @@ Registrar lo que el cliente pidió, calcular el total correcto y que cocina y ca
 - Líneas con producto, cantidad, precio congelado y notas.
 - Estados de preparación y de pago independientes.
 - Cola de cocina por mesa.
-- Pedido a domicilio para cliente registrado (fase posterior).
+- Pedido a domicilio para cliente registrado, con zonas y tarifa fija (D-147).
 - Trazabilidad de cambios.
 
 ## 3. Reglas de negocio
@@ -30,6 +30,7 @@ Registrar lo que el cliente pidió, calcular el total correcto y que cocina y ca
 | RN-156 | Pedido de mesa y domicilio no se mezclan. |
 | RN-157 | Un pedido pagado no se edita. |
 | RN-158 | No se aplican impuestos, propinas ni descuentos. |
+| RN-159 | El domicilio usa zonas y tarifa fija del restaurante, con entrega propia y cobro por su pasarela (D-147). |
 
 ## 4. Estados
 

@@ -1,62 +1,84 @@
-# Feature: pagos y comprobantes
+# Feature: cobro de pedidos y comprobantes
 
 **Estado:** NO INICIADO
 **Dueño:** Ingeniería
-**Decisiones:** D-111, D-114, D-128
+**Decisiones:** D-128, D-140, D-145
 **Documento frontend:** `05-frontend/features/pagos-comprobantes.md`
 
 ## 1. Objetivo
 
-Cerrar la cuenta de una mesa, registrar el pago y entregar un comprobante simple sin convertir a Lixus en un POS.
+Permitir que el restaurante cobre el total de un pedido con **su propia pasarela**, sin que Lixus reciba ese dinero ni mantenga un rol de cajero. Lixus genera el cobro, confirma el pago por webhook, libera la mesa y entrega un comprobante operativo.
 
-## 2. Alcance
+## 2. Los dos flujos de pago
 
-- Registrar pago en efectivo o en línea (sin procesar dinero en la versión inicial).
-- Confirmar pago y liberar la mesa.
-- Comprobante con numeración por tenant.
-- QR de descarga con token temporal.
+| Flujo | Quién paga | Quién recibe | Pasarela | Decisión |
+|---|---|---|---|---|
+| Suscripción | El restaurante | Lixus | Pasarela de Lixus | D-140 |
+| Pedido | El comensal | Cuenta del restaurante | Pasarela configurada por el tenant | D-145 |
+
+No se mezclan. El dinero de la venta nunca entra en una cuenta de Lixus.
+
+## 3. Alcance
+
+- Configurar la pasarela del restaurante por tenant (credenciales cifradas, nunca expuestas al cliente).
+- Generar un enlace o botón de cobro por el total del pedido.
+- El cliente o el mesero inicia el pago y elige el método en la pasarela del restaurante.
+- Confirmación por webhook firmado.
+- Mesa disponible al confirmar.
+- Comprobante operativo con numeración por tenant y QR de descarga.
 - Envío por correo si el cliente lo pide.
-- Historial de pagos.
+- Historial de cobros.
 
-## 3. Reglas de negocio
+## 4. Reglas de negocio
 
 | ID | Regla |
 |---|---|
-| RN-171 | El pago corresponde a un pedido del mismo tenant. |
-| RN-172 | El total del pago coincide con el total del pedido. |
-| RN-173 | Un pedido no se paga dos veces. |
-| RN-174 | Al confirmar el pago, la mesa queda disponible. |
-| RN-175 | El comprobante no tiene validez fiscal. |
-| RN-176 | No se almacenan datos de tarjeta. |
+| RN-171 | El cobro corresponde a un pedido del mismo tenant. |
+| RN-172 | El total del cobro coincide con el total calculado en el servidor. |
+| RN-173 | Un pedido no se cobra dos veces. |
+| RN-174 | Al confirmar el webhook, la mesa queda disponible. |
+| RN-175 | El comprobante de Lixus no tiene validez fiscal; la factura al comensal la emite el restaurante. |
+| RN-176 | Lixus no almacena datos de tarjeta. |
 | RN-177 | El token del comprobante caduca. |
 | RN-178 | La numeración es por tenant y no se reutiliza. |
+| RN-179 | Lixus no recibe dinero de los pedidos (D-145). |
+| RN-180 | Cada tenant configura su propia pasarela; no hay pasarela global de pedidos. |
+| RN-181 | El webhook se valida con firma, timestamp y `event_id` único. |
+| RN-182 | La suscripción se cobra por la pasarela de Lixus, separada de la del pedido (D-140). |
 
-## 4. API
+## 5. API prevista
 
 | Método | Ruta | Estado |
 |---|---|---|
-| POST | `/tenant/payments` | Parcial |
-| POST | `/tenant/payments/{id}/confirm` | Stub |
+| GET | `/tenant/payment-settings` | No existe |
+| PUT | `/tenant/payment-settings` | No existe |
+| POST | `/tenant/orders/{id}/payment-link` | No existe |
+| POST | `/webhooks/orders/{provider}` | Stub (sin firma) |
 | GET | `/tenant/payments` | No existe |
 | GET | `/public/receipts/{token}` | Stub |
-| POST | `/webhooks/payments/{provider}` | Stub |
 
-## 5. Datos
+Los endpoints actuales `/tenant/payments` y `/tenant/payments/{id}/confirm` se rediseñan: ya no registran pagos manuales de caja, sino enlaces de cobro y eventos de pasarela.
 
-- `tenant.payments`: pedido, monto, método, estado, referencia.
-- `tenant.payment_events`: evento, proveedor, payload, firma.
+## 6. Datos
+
+- `tenant.payment_settings`: proveedor, credenciales cifradas, cuenta destino, estado.
+- `tenant.payments`: pedido, monto, proveedor, referencia, estado.
+- `tenant.payment_events`: evento, proveedor, payload, firma, `event_id`.
 - `tenant.receipts`: número, token, expiración.
+- `platform.subscriptions`: cobro de la suscripción, separado de estos datos.
 
-## 6. Criterios de aceptación
+## 7. Criterios de aceptación
 
-- [ ] El cajero registra el pago del pedido correcto.
-- [ ] Al confirmar, la mesa queda disponible.
-- [ ] El comprobante se descarga por QR.
-- [ ] Un token vencido no abre el comprobante.
+- [ ] El restaurante configura su pasarela y el destino del dinero es su cuenta.
+- [ ] El mesero o el cliente genera el botón de pago del pedido.
+- [ ] La pasarela muestra el método de pago; Lixus no pide datos de tarjeta.
+- [ ] Un webhook firmado marca el pedido pagado y libera la mesa.
 - [ ] Un webhook sin firma se rechaza.
-- [ ] Un evento repetido no duplica el pago.
-- [ ] El comprobante muestra el detalle y el total.
+- [ ] Un evento repetido no duplica el cobro.
+- [ ] El comprobante se descarga por QR y expira.
+- [ ] El comprobante dice explícitamente que no factura al comensal.
+- [ ] El cobro de la suscripción no aparece mezclado con los cobros de pedidos.
 
-## 7. Brecha actual
+## 8. Brecha actual
 
-El endpoint de confirmación no confirma, el comprobante siempre responde 404 y el webhook no valida firma. Es el bloqueo P1 más importante para operar.
+El endpoint de confirmación no confirma, el comprobante siempre responde 404 y el webhook no valida firma. Además, el modelo actual asume caja y registro manual, incompatible con D-145. Es el bloqueo P1 más importante para operar.

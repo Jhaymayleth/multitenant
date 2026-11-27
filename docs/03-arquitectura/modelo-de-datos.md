@@ -36,7 +36,7 @@
 
 | Tabla | Propósito |
 |---|---|
-| `tenant_settings` | Configuración pública y marca (singleton) |
+| `tenant_settings` | Configuración pública, marca, zonas de domicilio y tarifa (singleton) |
 | `staff_profiles` | Perfil local del empleado |
 | `customers` | Clientes registrados del restaurante |
 | `menu_categories` | Categorías del menú |

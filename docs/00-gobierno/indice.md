@@ -65,6 +65,7 @@
 | [areas.md](../05-frontend/areas.md) | Las tres caras del producto |
 | [pantallas.md](../05-frontend/pantallas.md) | Mapa de rutas y estados |
 | [componentes.md](../05-frontend/componentes.md) | Componentes y patrones de interfaz |
+| [cliente-api.md](../05-frontend/cliente-api.md) | Especificación técnica de BL-01 |
 | [accesibilidad.md](../05-frontend/accesibilidad.md) | Criterios de accesibilidad |
 | [features/](../05-frontend/features/) | Una ficha por funcionalidad, espejo del backend |
 
@@ -94,6 +95,7 @@
 
 | Documento | Estado |
 |---|---|
+| [README.md](../08-legal/README.md) | Todo por definir, diferido |
 | [terminos-servicio.md](../08-legal/terminos-servicio.md) | Borrador |
 | [politica-privacidad.md](../08-legal/politica-privacidad.md) | Borrador |
 | [politica-cookies.md](../08-legal/politica-cookies.md) | Borrador |

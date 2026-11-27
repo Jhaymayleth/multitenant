@@ -17,9 +17,9 @@
 
 ## 2. Objeto
 
-Lixus presta un servicio de software como servicio (SaaS) para la administración de restaurantes: menú, personal, mesas, pedidos, reservas, caja ligera y página pública.
+Lixus presta un servicio de software como servicio (SaaS) para la administración de restaurantes: menú, personal, mesas, pedidos, reservas, cobro de pedidos por pasarela del restaurante y página pública.
 
-El servicio no incluye procesamiento de pagos con tarjeta, facturación fiscal, contabilidad, inventario ni logística de reparto, salvo que se contrate por separado.
+El servicio no incluye procesamiento de pagos de pedidos, facturación fiscal al comensal, contabilidad, inventario ni logística de reparto. El cobro de pedidos se hace con la pasarela del restaurante (D-145) y la suscripción con la pasarela de Lixus (D-140).
 
 ## 3. Aceptación
 

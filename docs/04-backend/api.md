@@ -117,8 +117,9 @@ Estado actual: algunas rutas devuelven `{"detail": "..."}`. La unificación es d
 
 | Método | Ruta | Descripción |
 |---|---|---|
-| POST | `/tenant/payments` | Registra pago |
-| POST | `/tenant/payments/{id}/confirm` | Confirma pago (stub) |
+| POST | `/tenant/orders/{id}/payment-link` | Genera cobro con pasarela del restaurante |
+| GET | `/tenant/payments` | Historial de cobros del pedido |
+| POST | `/webhooks/orders/{provider}` | Confirma cobro por webhook firmado (stub) |
 
 ### Sitio público
 
@@ -148,7 +149,7 @@ Estado actual: algunas rutas devuelven `{"detail": "..."}`. La unificación es d
 
 | Método | Ruta | Descripción |
 |---|---|---|
-| POST | `/webhooks/payments/{provider}` | Evento de pago (stub) |
+| POST | `/webhooks/subscriptions/{provider}` | Evento de suscripción (stub) |
 | GET | `/audit` | Auditoría global |
 
 ## 4. Reglas de contrato

@@ -6,7 +6,7 @@
 
 ## 1. Qué es Lixus
 
-Lixus es una plataforma SaaS para restaurantes independientes. Cada restaurante tiene su propio espacio aislado donde administra menú, personal, mesas, pedidos, reservas, caja ligera y su página pública. Lixus, como plataforma, da de alta y administra los restaurantes.
+Lixus es una plataforma SaaS para restaurantes independientes. Cada restaurante tiene su propio espacio aislado donde administra menú, personal, mesas, pedidos, reservas, cobro de pedidos por pasarela del restaurante y su página pública. Lixus, como plataforma, da de alta y administra los restaurantes.
 
 No es un POS completo, no es una app de reparto y no es un marketplace de restaurantes. Es el sistema operativo diario del local y su presencia digital.
 
@@ -34,6 +34,8 @@ La promesa tiene tres partes que deben cumplirse siempre:
 2. **En línea:** el cliente encuentra el menú, la información y la forma de reservar sin depender de una red social.
 3. **Sin fricción:** el restaurante no necesita un técnico para operar el día a día.
 
+**Prueba de cumplimiento (D-134):** la promesa se cumple cuando un restaurante opera un servicio completo —pedido, cocina, cobro y página pública— sin volver al papel ni a Excel.
+
 ## 6. Principios de producto
 
 1. **La operación manda.** Si una función no ayuda a atender, cobrar o servir mejor, no entra en la versión inicial.
@@ -44,6 +46,8 @@ La promesa tiene tres partes que deben cumplirse siempre:
 
 ## 7. Lo que Lixus no es
 
+Aprobado en D-133:
+
 - No es un marketplace que muestra restaurantes de la competencia.
 - No es un sistema contable ni facturación fiscal.
 - No es un POS con turnos, arqueo e inventario.
@@ -53,4 +57,4 @@ La promesa tiene tres partes que deben cumplirse siempre:
 
 ## 8. Estado de esta identidad
 
-La definición de qué es Lixus y para quién es está aprobada. La misión, visión y promesa fueron validadas por el dueño y cerradas en D-129.
+La definición de qué es Lixus y para quién es está aprobada. La misión, visión y promesa fueron validadas por el dueño y cerradas en D-129. Los límites del producto (D-133), la prueba de cumplimiento (D-134) y el tono (D-132) también están aprobados.

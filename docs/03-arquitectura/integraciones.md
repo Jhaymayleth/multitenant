@@ -15,7 +15,7 @@ Toda integración externa se encapsula detrás de una interfaz del backend. El r
 |---|---|---|---|---|
 | Cloudflare R2 | Imágenes de menú y marca | Prevista | `StorageProvider` | `R2_*` |
 | Correo transaccional | Invitaciones, códigos, avisos | No iniciada | `EmailProvider` | `EMAIL_*` |
-| Pagos | Confirmar pago y liberar mesa | No iniciada | `PaymentProvider` | `PAYMENT_*` |
+| Pagos | Cobro de pedidos con pasarela del restaurante y suscripción con pasarela de Lixus | No iniciada | `RestaurantPaymentProvider` + `SubscriptionProvider` | `PAYMENT_*` |
 | Google | Login de clientes registrados | Prevista | `OAuthProvider` | `GOOGLE_*` |
 | IA | Descripciones y asistencia | Fuera de la versión inicial | `AIProvider` | `AI_*` |
 | Monitoreo | Salud, errores y métricas | Parcial | Logs y healthchecks | `OBS_*` |
@@ -40,12 +40,16 @@ Toda integración externa se encapsula detrás de una interfaz del backend. El r
 
 ## 5. Pagos
 
-- La versión inicial no procesa dinero.
-- Se registra el pago y se emite comprobante.
-- Si se integra un proveedor, se hace por webhook firmado.
+Hay dos flujos separados (D-140 y D-145):
+
+- **Suscripción:** la paga el restaurante a Lixus con la pasarela de Lixus.
+- **Pedidos:** los paga el comensal con la pasarela que configura cada restaurante; el dinero llega a la cuenta del restaurante, no a Lixus.
+
+Lixus genera el cobro del pedido, recibe el webhook firmado, marca el pedido pagado, libera la mesa y emite un comprobante operativo. No almacena datos de tarjeta.
+
 - Eventos: `payment.created`, `payment.confirmed`, `payment.failed`.
-- Idempotencia por `event_id`.
-- No se almacenan datos de tarjeta.
+- Idempotencia por `event_id` y firma HMAC obligatoria.
+- Proveedor de pedidos por tenant; proveedor de suscripción global.
 
 ## 6. Google
 

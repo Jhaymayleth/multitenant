@@ -76,10 +76,9 @@ Si falla cualquier paso, se rechaza. No se corrige en el frontend.
 | `owner` | Todo el restaurante, plan y personal |
 | `admin` | Operación, menú y personal; no plan ni CEO |
 | `waiter` | Mesas, pedidos y reservas |
-| `cashier` | Pagos y comprobantes |
 | `cook` | Estados de preparación; sin datos personales |
 
-La matriz definitiva está en `04-backend/features/personal-permisos.md` y pendiente en PD-22.
+No existe rol de cajero (D-145): Lixus no recibe dinero de los pedidos. La matriz definitiva está aprobada en D-146 y documentada en `04-backend/features/personal-permisos.md`.
 
 ### Rol Lixus
 
@@ -95,7 +94,7 @@ La matriz definitiva está en `04-backend/features/personal-permisos.md` y pendi
 - La sesión se crea al escanear y se reanuda si sigue abierta.
 - No requiere cuenta.
 - Permite enviar solicitudes, no crear pedidos.
-- Se cierra por pago confirmado o cancelación en efectivo.
+- Se cierra por pago confirmado por webhook o por cierre manual del mesero con motivo.
 - Un QR antiguo no reabre una sesión cerrada.
 
 ## 6. Archivos
@@ -109,6 +108,7 @@ La matriz definitiva está en `04-backend/features/personal-permisos.md` y pendi
 
 ## 7. Webhooks
 
+- Hay webhooks de pedidos (pasarela del restaurante) y de suscripción (pasarela de Lixus).
 - Firmados con HMAC y secreto compartido.
 - Validar firma, timestamp y `event_id` único.
 - Rechazar eventos repetidos.

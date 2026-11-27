@@ -8,6 +8,8 @@
 
 import Link from 'next/link';
 
+import { PlatformGuard } from '@/components/platform-guard';
+
 export default function LixusPortalLayout({
   children,
 }: {
@@ -42,7 +44,7 @@ export default function LixusPortalLayout({
 
       {/* Área de trabajo de plataforma */}
       <main style={{ flex: 1, backgroundColor: '#f8fafc', padding: '32px' }}>
-        {children}
+        <PlatformGuard>{children}</PlatformGuard>
       </main>
     </div>
   );

@@ -8,6 +8,8 @@
 
 import Link from 'next/link';
 
+import { SessionGuard } from '@/components/session-guard';
+
 export default function CeoPortalLayout({
   children,
 }: {
@@ -35,9 +37,6 @@ export default function CeoPortalLayout({
           <Link href="/admin/pedidos" style={{ color: '#e2e8f0', textDecoration: 'none', padding: '8px', borderRadius: '4px' }}>
             🧾 Pedidos y Cocina
           </Link>
-          <Link href="/admin/caja" style={{ color: '#e2e8f0', textDecoration: 'none', padding: '8px', borderRadius: '4px' }}>
-            💳 Caja Ligera
-          </Link>
           <Link href="/admin/configuracion" style={{ color: '#e2e8f0', textDecoration: 'none', padding: '8px', borderRadius: '4px' }}>
             ⚙️ Configuración Web
           </Link>
@@ -51,7 +50,7 @@ export default function CeoPortalLayout({
 
       {/* Contenido principal del panel */}
       <main style={{ flex: 1, backgroundColor: '#f1f5f9', padding: '32px' }}>
-        {children}
+        <SessionGuard>{children}</SessionGuard>
       </main>
     </div>
   );

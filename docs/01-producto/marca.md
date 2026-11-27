@@ -25,7 +25,7 @@ Ejemplos:
 | En vez de... | Decir... |
 |---|---|
 | “Optimiza tus procesos operativos” | “Ten el día de tu restaurante en orden” |
-| “Plataforma omnicanal” | “Mesa, mostrador y domicilio en un solo lugar” |
+| “Plataforma omnicanal” | “Mesa, pedidos y reservas en un solo lugar” |
 | “Solución integral” | “Menú, pedidos, mesas y cobro” |
 
 ## 3. Identidad visual (propuesta)

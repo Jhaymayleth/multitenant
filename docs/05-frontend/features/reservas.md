@@ -3,6 +3,8 @@
 **Estado:** NO INICIADO
 **Dueño:** Ingeniería
 **Documento backend:** `04-backend/features/reservas.md`
+**Decisiones:** D-160, D-161
+**Prioridad:** P1. Fuera del MVP mientras no se active el flag por tenant (D-160).
 
 ## 1. Objetivo
 
@@ -40,6 +42,8 @@ Que el comensal vea disponibilidad y reserve sin fricción, y que el restaurante
 - [ ] El restaurante ve la reserva al instante.
 - [ ] El no-show se registra con un toque.
 - [ ] La hora se muestra en la zona del restaurante.
+- [ ] La reserva pública solo aparece si el tenant activó el flag (D-160).
+- [ ] La mesa reservada se ve en azul y no se ofrece en una franja ocupada (D-157, D-161).
 
 ## 6. Estado actual
 

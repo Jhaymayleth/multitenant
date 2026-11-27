@@ -20,6 +20,8 @@
 
 ### Aislamiento
 
+La matriz completa y su ejecución en CI están en [`aislamiento.md`](aislamiento.md) (BL-08).
+
 - Usuario de A no lee datos de B.
 - Token de A no abre ruta de B.
 - `schema_name` inválido se rechaza.

@@ -3,6 +3,7 @@
 **Estado:** PARCIAL
 **Dueño:** Ingeniería
 **Documento backend:** `04-backend/features/pedidos.md`
+**Especificación de la feature:** [`pedidos-api.md`](../pedidos-api.md) (BL-04)
 
 ## 1. Objetivo
 

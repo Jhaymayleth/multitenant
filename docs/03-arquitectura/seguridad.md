@@ -1,9 +1,9 @@
 # Seguridad y control de acceso
 
 **Estado:** Vigente
-**Última revisión:** 26 de noviembre de 2026
+**Última revisión:** 27 de noviembre de 2026
 **Dueño:** Ingeniería
-**Decisiones:** D-105, D-106, D-112, D-117
+**Decisiones:** D-105, D-106, D-112, D-117, D-152, D-153
 
 ## 1. Principios
 
@@ -33,12 +33,12 @@
 - Correo y contraseña para CEO, personal y clientes registrados.
 - Google para clientes registrados (previsto; no para empleados en la versión inicial).
 - Código de un solo uso para verificar correo y primer acceso de un empleado pre-registrado.
-- Recuperación de contraseña por enlace de un solo uso.
+- Recuperación de contraseña por código de un solo uso con caducidad de 15 minutos (D-153).
 
 ### 3.2 Contraseñas
 
 - Hash con bcrypt y salt.
-- Longitud mínima por definir; propuesta: 10 caracteres para clientes y 12 para personal.
+- Longitud mínima: 8 caracteres para cualquier cuenta (D-152).
 - No se almacena la contraseña en claro ni se envía por correo.
 - Mensaje de login genérico para no filtrar si el correo existe.
 

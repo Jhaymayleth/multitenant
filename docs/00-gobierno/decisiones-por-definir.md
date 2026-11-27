@@ -42,7 +42,7 @@ Cada fila es una pregunta abierta. El default es una propuesta del PO, no una de
 | PD-10 | Marco de métricas sin metas numéricas hasta tener datos (D-144) | 2026-11-27 |
 | PD-06 | Alcance de la versión vendible aprobado (D-121) | 2026-11-27 |
 | PD-22 | Matriz de permisos sin cajero aprobada (D-145, D-146) | 2026-11-27 |
-| PD-24 | Domicilio con zonas, tarifa fija y entrega propia (D-147) | 2026-11-27 |
+| PD-24 | Domicilio fuera de Lixus; registro simple y enlace configurable (D-155, D-156) | 2026-11-27 |
 | PD-25 | Multi-sucursal fuera de la versión inicial (D-122, D-121) | 2026-11-27 |
 | PD-26 | IA fuera de la versión inicial y sin fecha (D-121) | 2026-11-27 |
 | PD-27 | Impuestos, propinas y descuentos fuera del cálculo (D-113) | 2026-11-27 |

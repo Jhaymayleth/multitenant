@@ -38,7 +38,7 @@ Suscripción mensual por restaurante, sin comisión por pedido ni cobros escondi
 | POS empresarial | Costoso, complejo, pensado para cadenas | Producto enfocado en una sede independiente |
 | Plataforma de reservas | Solo cubre reservas | Operación completa y página pública |
 | Constructor web | Página bonita sin operación | Página conectada al menú y al restaurante |
-| App de reparto | Solo cubre el canal de domicilio | Mesa, mostrador, domicilio y reservas |
+| App de reparto | Solo cubre el canal de domicilio | Mesa, pedidos, reservas y página pública; el domicilio lo resuelve el restaurante |
 
 ## 4. Pruebas de valor
 
@@ -65,6 +65,6 @@ El valor debe demostrarse con hechos observables, no con adjetivos:
 - Manejar efectivo, arqueo ni dinero de los pedidos.
 - Facturación fiscal.
 - Inventario o control de stock.
-- Reparto con flota propia.
+- Gestión de domicilio y reparto (D-155).
 - IA que opere el restaurante sola.
 - Múltiples sucursales en la versión inicial.

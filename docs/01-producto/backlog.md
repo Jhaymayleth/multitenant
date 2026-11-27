@@ -1,7 +1,7 @@
 # Backlog priorizado
 
 **Estado:** Vigente
-**Última revisión:** 26 de noviembre de 2026
+**Última revisión:** 27 de noviembre de 2026
 **Dueño:** Producto
 
 Prioridad: **P0** bloquea al primer cliente que paga; **P1** necesario para operar con comodidad; **P2** mejora o expansión.
@@ -11,13 +11,13 @@ Prioridad: **P0** bloquea al primer cliente que paga; **P1** necesario para oper
 | ID | Feature | Resultado esperado | Estado | Depende de |
 |---|---|---|---|---|
 | BL-01 | Frontend conectado | Login y panel consumen la API real; ver [especificación](../05-frontend/cliente-api.md) | NO INICIADO | — |
-| BL-02 | Identidad y sesión | Login, logout, guards y recuperación | PARCIAL | BL-01 |
-| BL-03 | Menú | CRUD completo y publicación | PARCIAL | BL-01 |
-| BL-04 | Pedidos | Líneas, total en servidor y estados | PARCIAL | BL-03 |
-| BL-05 | Mesas y QR | Mesa, sesión y solicitudes | PARCIAL | BL-03 |
-| BL-06 | Página pública | Menú, información y publicación | PARCIAL | BL-03 |
+| BL-02 | Identidad y sesión | Login, logout, guards y recuperación; ver [especificación](../05-frontend/identidad-api.md) | PARCIAL · especificación lista | BL-01 |
+| BL-03 | Menú | CRUD completo y publicación; ver [especificación](../05-frontend/menu-api.md) | PARCIAL · especificación lista | BL-01 |
+| BL-04 | Pedidos | Líneas, total en servidor y estados; ver [especificación](../05-frontend/pedidos-api.md) | PARCIAL · especificación lista | BL-03 |
+| BL-05 | Mesas y QR | Panel con colores y etiquetas, sesión y solicitudes; ver [especificación](../05-frontend/mesas-qr-api.md) | PARCIAL · especificación lista | BL-03 |
+| BL-06 | Página pública | Menú, información y publicación; ver [especificación](../05-frontend/sitio-publico-api.md) | PARCIAL · especificación lista | BL-03 |
 | BL-07 | Onboarding | Alta verificada y acceso del CEO | PARCIAL | BL-02 |
-| BL-08 | Aislamiento | Pruebas negativas entre tenants | PARCIAL | — |
+| BL-08 | Aislamiento | Pruebas negativas entre tenants; ver [especificación](../07-calidad/aislamiento.md) | PARCIAL · especificación lista | — |
 | BL-09 | Errores y validación | Mensajes comprensibles y request_id | NO INICIADO | BL-01 |
 | BL-10 | Backups | Copia y restauración probadas | PARCIAL | — |
 

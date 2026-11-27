@@ -2,8 +2,9 @@
 
 **Estado:** PARCIAL
 **Dueño:** Ingeniería
-**Decisiones:** D-110, D-113
+**Decisiones:** D-110, D-113, D-155, D-156
 **Documento frontend:** `05-frontend/features/pedidos.md`
+**Especificación de la feature:** [`05-frontend/pedidos-api.md`](../../05-frontend/pedidos-api.md) (BL-04)
 
 ## 1. Objetivo
 
@@ -15,7 +16,7 @@ Registrar lo que el cliente pidió, calcular el total correcto y que cocina y co
 - Líneas con producto, cantidad, precio congelado y notas.
 - Estados de preparación y de pago independientes.
 - Cola de cocina por mesa.
-- Pedido a domicilio para cliente registrado, con zonas y tarifa fija (D-147).
+- Registro simple de pedido a domicilio, sin zonas, tarifa ni seguimiento; la entrega la resuelve el restaurante fuera de Lixus (D-155).
 - Trazabilidad de cambios.
 
 ## 3. Reglas de negocio
@@ -30,12 +31,13 @@ Registrar lo que el cliente pidió, calcular el total correcto y que cocina y co
 | RN-156 | Pedido de mesa y domicilio no se mezclan. |
 | RN-157 | Un pedido pagado no se edita. |
 | RN-158 | No se aplican impuestos, propinas ni descuentos. |
-| RN-159 | El domicilio usa zonas y tarifa fija del restaurante, con entrega propia y cobro por su pasarela (D-147). |
+| RN-159 | El domicilio no tiene logística en Lixus: sin zonas, tarifa ni seguimiento. El restaurante lo resuelve con un servicio externo (D-155). |
 
 ## 4. Estados
 
-Preparación: `pending → preparing → ready → served`.
-Pago: `unpaid → paid → refunded` (reembolso fuera de la versión inicial).
+Los valores de la columna `status` son `draft`, `confirmed`, `in_preparation`, `ready`, `served`, `out_for_delivery`, `delivered`, `closed` y `cancelled`. Los nombres «pendiente», «preparando», «listo» y «servido» son etiquetas de interfaz para esos valores. La transición detallada está en [`05-frontend/pedidos-api.md`](../../05-frontend/pedidos-api.md).
+
+Pago: `unpaid`, `pending`, `paid`, `refunded` y `not_applicable` (reembolso fuera de la versión inicial).
 
 ## 5. API
 

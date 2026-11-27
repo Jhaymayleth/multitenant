@@ -3,6 +3,7 @@
 **Estado:** PARCIAL
 **Dueño:** Ingeniería
 **Documento frontend:** `05-frontend/features/menu.md`
+**Especificación de la feature:** [`05-frontend/menu-api.md`](../../05-frontend/menu-api.md) (BL-03)
 
 ## 1. Objetivo
 

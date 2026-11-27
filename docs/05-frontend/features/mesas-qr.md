@@ -3,6 +3,8 @@
 **Estado:** PARCIAL
 **Dueño:** Ingeniería
 **Documento backend:** `04-backend/features/mesas-qr.md`
+**Especificación de la feature:** [`mesas-qr-api.md`](../mesas-qr-api.md) (BL-05)
+**Decisiones:** D-157, D-158, D-159, D-160
 
 ## 1. Objetivo
 
@@ -19,21 +21,20 @@ Que el mesero vea el salón de un vistazo y que el cliente pueda pedir atención
 
 ## 3. Estados de mesa
 
-- Disponible.
-- Ocupada.
-- Pendiente de pago.
-- Reservada.
-- Inactiva.
+- Disponible: verde, acción «ocupar mesa».
+- Ocupada y pendiente de pago: rojo, acción «liberar mesa».
+- Reservada: azul, solo si el tenant activó reservas (D-160).
+- Inactiva: sin acción.
 
-Cada estado tiene color, texto y acción permitida.
+Las tarjetas se agrupan por piso y zona opcional, con la etiqueta visible generada por el backend (D-157, D-158). El mesero no busca un ID: ve la mesa y toca la acción.
 
 ## 4. Flujos
 
 ### Abrir mesa
 
-1. El mesero toca la mesa.
+1. El mesero toca «ocupar mesa» en la tarjeta.
 2. Se crea o reanuda la sesión.
-3. La mesa pasa a ocupada.
+3. La mesa pasa a ocupada y la tarjeta a rojo.
 
 ### Solicitud del cliente
 
@@ -43,9 +44,10 @@ Cada estado tiene color, texto y acción permitida.
 
 ### Cerrar mesa
 
-1. Se confirma el pago.
-2. La mesa pasa a disponible.
-3. La sesión se cierra.
+1. El mesero toca «liberar mesa» y escribe el motivo.
+2. Si hay pedido sin cobrar, el sistema lo bloquea y explica por qué; si se fuerza, queda registrado (D-159).
+3. La mesa pasa a disponible, la tarjeta a verde y la sesión se cierra.
+4. El cobro confirmado por webhook cierra la mesa sin intervención manual.
 
 ## 5. Criterios de aceptación
 
@@ -54,7 +56,9 @@ Cada estado tiene color, texto y acción permitida.
 - [ ] El cliente ve su mesa correcta.
 - [ ] La solicitud llega al panel.
 - [ ] Una mesa ocupada no se abre dos veces.
-- [ ] El mesero puede liberar con motivo.
+- [ ] El mesero puede liberar con motivo y sin pedido pendiente.
+- [ ] La etiqueta y el color permiten identificar la mesa sin buscar un ID.
+- [ ] El esquema de etiquetas y las zonas los configura el restaurante.
 
 ## 6. Estado actual
 

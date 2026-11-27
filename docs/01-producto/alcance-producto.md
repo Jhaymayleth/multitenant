@@ -1,6 +1,6 @@
 # Alcance del producto
 
-**Estado:** Vigente (D-121)
+**Estado:** Vigente (D-121, D-155)
 **Última revisión:** 27 de noviembre de 2026
 **Dueño:** Producto
 **Decisión:** D-121
@@ -17,8 +17,8 @@ La versión que se vende debe resolver el día completo de un restaurante indepe
 | Identidad y sesión | Login, logout, sesión httpOnly, roles y recuperación de acceso | PARCIAL |
 | Menú | Categorías y productos con precio, descripción, imagen, disponibilidad y publicación | PARCIAL |
 | Personal | Crear empleados, asignar rol, activar y desactivar | PARCIAL |
-| Mesas y QR | Mesas con zona y estado; QR por mesa; solicitudes del cliente | PARCIAL |
-| Pedidos | Pedido de mesa por el mesero, líneas, notas, cocina y estados | PARCIAL |
+| Mesas y QR | Panel con colores y dos botones; etiqueta generada, zonas opcionales, QR y solicitudes | PARCIAL |
+| Pedidos | Pedido de mesa por el mesero y registro simple de domicilio sin logística; líneas, notas, cocina y estados | PARCIAL |
 | Reservas | Disponibilidad, reserva con cuenta, estados y no-show | PARCIAL |
 | Cobro de pedidos | Botón de pago con pasarela del restaurante, comprobante y QR; sin cajero | NO INICIADO |
 | Página pública | Marca, menú, horarios, contacto y publicación | PARCIAL |
@@ -30,7 +30,7 @@ La versión que se vende debe resolver el día completo de un restaurante indepe
 - Caja, arqueo, manejo de efectivo y conciliación bancaria del restaurante.
 - Facturación fiscal y contabilidad.
 - POS con turnos, arqueo, inventario y devoluciones.
-- Reparto con flota propia o seguimiento en mapa.
+- Gestión de domicilio: zonas, tarifas, flota, seguimiento y entrega; se resuelve fuera de Lixus (D-155).
 - Múltiples sucursales por tenant.
 - Constructor visual libre y plantillas múltiples.
 - Directorio o marketplace de restaurantes.

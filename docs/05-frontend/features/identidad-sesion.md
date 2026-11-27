@@ -3,6 +3,7 @@
 **Estado:** PARCIAL
 **Dueño:** Ingeniería
 **Documento backend:** `04-backend/features/identidad-sesion.md`
+**Especificación de la feature:** [`identidad-api.md`](../identidad-api.md) (BL-02)
 
 ## 1. Objetivo
 

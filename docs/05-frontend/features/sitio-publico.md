@@ -3,6 +3,7 @@
 **Estado:** PARCIAL
 **Dueño:** Ingeniería
 **Documento backend:** `04-backend/features/sitio-publico.md`
+**Especificación de la feature:** [`sitio-publico-api.md`](../sitio-publico-api.md) (BL-06)
 
 ## 1. Objetivo
 
@@ -27,7 +28,8 @@ Que el restaurante tenga una página propia, con su marca y su menú, que pueda 
 - Horarios.
 - Contacto y redes.
 - Imagen principal.
-- Visibilidad de secciones.
+- Visibilidad de secciones: hero, menú, información, horarios, contacto y galería (D-154).
+- Enlace de domicilio configurado por el restaurante (D-155).
 
 ## 4. Criterios de aceptación
 
@@ -35,6 +37,7 @@ Que el restaurante tenga una página propia, con su marca y su menú, que pueda 
 - [ ] Publicar y despublicar funciona.
 - [ ] El menú público solo muestra lo publicado.
 - [ ] La página carga en móvil y tiene metadatos.
+- [ ] El enlace de domicilio configurado aparece en la página pública.
 - [ ] No se mezcla contenido de otro tenant.
 - [ ] La página no enlaza al panel privado.
 

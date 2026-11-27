@@ -21,7 +21,7 @@
 |---|---|---|---|
 | `/admin` | Resumen del día | PARCIAL | Pedidos, mesas y cobros |
 | `/admin/menu` | Menú y categorías | PARCIAL | CRUD |
-| `/admin/mesas` | Mesas y QR | PARCIAL | Mesas y sesiones |
+| `/admin/mesas` | Salón con tarjetas por zona, colores y dos botones | PARCIAL | Mesas, etiquetas y sesiones |
 | `/admin/pedidos` | Pedidos y cocina | PARCIAL | Pedidos y estados |
 | `/admin/pedidos/cobros` | Historial de cobros | NO INICIADO | Pasarela del restaurante |
 | `/admin/reservas` | Reservas | NO INICIADO | Reservas |

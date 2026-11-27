@@ -3,6 +3,7 @@
 **Estado:** PARCIAL
 **Dueño:** Ingeniería
 **Documento backend:** `04-backend/features/menu.md`
+**Especificación de la feature:** [`menu-api.md`](../menu-api.md) (BL-03)
 
 ## 1. Objetivo
 

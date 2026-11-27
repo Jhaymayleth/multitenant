@@ -74,6 +74,8 @@ Debe existir evidencia de:
 4. Un schema inválido se rechaza antes de ejecutar SQL.
 5. Una ruta pública solo devuelve el tenant del slug.
 
+La matriz de pruebas y su ejecución en CI están en [`07-calidad/aislamiento.md`](../07-calidad/aislamiento.md) (BL-08).
+
 ## 9. Límites conocidos
 
 - No hay RLS activo.

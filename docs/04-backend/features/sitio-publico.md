@@ -2,8 +2,9 @@
 
 **Estado:** PARCIAL
 **Dueño:** Ingeniería
-**Decisiones:** D-108, D-109
+**Decisiones:** D-108, D-109, D-154, D-155
 **Documento frontend:** `05-frontend/features/sitio-publico.md`
+**Especificación de la feature:** [`05-frontend/sitio-publico-api.md`](../../05-frontend/sitio-publico-api.md) (BL-06)
 
 ## 1. Objetivo
 
@@ -11,7 +12,8 @@ Dar a cada restaurante una página pública con su marca, menú, horarios y cont
 
 ## 2. Alcance
 
-- Plantilla común: hero, menú, información, galería, contacto y horarios.
+- Plantilla común con seis secciones aprobadas: hero, menú, información, horarios, contacto y galería (D-154).
+- Enlace de domicilio configurable por el CEO; la entrega se resuelve fuera de Lixus (D-155).
 - Personalización de logo, colores, textos, imagen principal y visibilidad de secciones.
 - Publicar y despublicar.
 - SEO básico y metadatos por restaurante.

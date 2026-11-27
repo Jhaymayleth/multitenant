@@ -4,6 +4,7 @@
 **Dueño:** Ingeniería
 **Decisiones:** D-105, D-106
 **Documento frontend:** `05-frontend/features/identidad-sesion.md`
+**Especificación de la feature:** [`05-frontend/identidad-api.md`](../../05-frontend/identidad-api.md) (BL-02)
 
 ## 1. Objetivo
 

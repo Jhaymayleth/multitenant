@@ -1,7 +1,7 @@
 # Changelog
 
 **Estado:** Vigente
-**Última revisión:** 26 de noviembre de 2026
+**Última revisión:** 27 de noviembre de 2026
 
 Registra cambios de producto, documentación e infraestructura. No sustituye al registro de decisiones.
 
@@ -37,6 +37,18 @@ Registra cambios de producto, documentación e infraestructura. No sustituye al 
 - Se difiere toda la parte legal; la decisión provisional D-150 queda cancelada a solicitud del dueño.
 - Se fija el foco en el MVP y se difieren operación, venta y legal (D-151).
 - Se escribe la especificación técnica de BL-01 en `05-frontend/cliente-api.md`.
+- Se escribe la especificación técnica de BL-03 en `05-frontend/menu-api.md` y se enlaza desde las fichas de menú.
+- Se escriben las especificaciones de BL-02, BL-04, BL-05 y BL-06 en `05-frontend/` y se enlazan desde sus fichas espejo.
+- Se escribe la especificación de BL-08 en `07-calidad/aislamiento.md` con la matriz de pruebas negativas.
+- Se aprueba la longitud mínima de contraseña de 8 caracteres (D-152).
+- Se fija la caducidad del código de recuperación en 15 minutos, de un solo uso (D-153).
+- Se aprueban las seis secciones de la plantilla pública (D-154).
+- Se saca la gestión de domicilio de Lixus: sin zonas, tarifas ni logística; D-147 queda sustituida y D-110 se ajusta en su parte de domicilio (D-155, D-156).
+- Se aprueba el panel de mesas con colores y dos botones de ocupación (D-157).
+- Se aprueban las etiquetas generadas por el backend: numérico y zona opcional en el MVP (D-158).
+- Se aprueba liberar mesa solo con motivo y sin pedido pendiente (D-159).
+- Se mantienen las reservas en P1, activables por tenant y sin ligar a plan (D-160).
+- Se aprueba la ventana de reserva configurable con validación de solape al reservar y al ocupar (D-161).
 - El material anterior pasa a `_legado/` como referencia histórica.
 
 ## 1.0 — 2026-11-24

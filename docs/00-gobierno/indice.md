@@ -1,7 +1,7 @@
 # Índice maestro
 
 **Estado:** Vigente
-**Última revisión:** 26 de noviembre de 2026
+**Última revisión:** 27 de noviembre de 2026
 **Dueño:** Producto
 
 ## 1. Gobierno
@@ -66,6 +66,11 @@
 | [pantallas.md](../05-frontend/pantallas.md) | Mapa de rutas y estados |
 | [componentes.md](../05-frontend/componentes.md) | Componentes y patrones de interfaz |
 | [cliente-api.md](../05-frontend/cliente-api.md) | Especificación técnica de BL-01 |
+| [identidad-api.md](../05-frontend/identidad-api.md) | Especificación técnica de BL-02 |
+| [menu-api.md](../05-frontend/menu-api.md) | Especificación técnica de BL-03 |
+| [pedidos-api.md](../05-frontend/pedidos-api.md) | Especificación técnica de BL-04 |
+| [mesas-qr-api.md](../05-frontend/mesas-qr-api.md) | Especificación técnica de BL-05 |
+| [sitio-publico-api.md](../05-frontend/sitio-publico-api.md) | Especificación técnica de BL-06 |
 | [accesibilidad.md](../05-frontend/accesibilidad.md) | Criterios de accesibilidad |
 | [features/](../05-frontend/features/) | Una ficha por funcionalidad, espejo del backend |
 
@@ -90,6 +95,7 @@
 | [criterios-aceptacion.md](../07-calidad/criterios-aceptacion.md) | Definición de terminado |
 | [release.md](../07-calidad/release.md) | Cómo se libera una versión |
 | [deuda-tecnica.md](../07-calidad/deuda-tecnica.md) | Deuda conocida y prioridad |
+| [aislamiento.md](../07-calidad/aislamiento.md) | Especificación técnica de BL-08 |
 
 ## 9. Legal
 

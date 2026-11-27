@@ -1,7 +1,7 @@
 # Modelo de datos
 
 **Estado:** Vigente
-**Última revisión:** 26 de noviembre de 2026
+**Última revisión:** 27 de noviembre de 2026
 **Dueño:** Ingeniería
 
 ## 1. Principios
@@ -36,12 +36,12 @@
 
 | Tabla | Propósito |
 |---|---|
-| `tenant_settings` | Configuración pública, marca, zonas de domicilio y tarifa (singleton) |
+| `tenant_settings` | Configuración pública, marca, secciones y enlace de domicilio (singleton) |
 | `staff_profiles` | Perfil local del empleado |
 | `customers` | Clientes registrados del restaurante |
 | `menu_categories` | Categorías del menú |
 | `menu_products` | Productos con precio, imagen y publicación |
-| `restaurant_tables` | Mesas, zona y estado |
+| `restaurant_tables` | Mesas con etiqueta visible, piso/zona opcional, estado y registro de cierre |
 | `table_sessions` | Sesión anónima por mesa y QR |
 | `service_requests` | Solicitudes del cliente desde la mesa |
 | `orders` | Cabecera del pedido |
@@ -88,5 +88,7 @@
 - Campos de publicación y orden del menú.
 - Modelo de suscripción y facturación.
 - Multi-sucursal (fuera de la versión inicial).
+- Zonas y tarifas de domicilio: fuera del producto (D-155).
+- Esquema de etiqueta de mesa con grupo con nombre: evolución sin fecha (D-158).
 
 Ver `04-backend/datos.md` para el detalle de implementación.

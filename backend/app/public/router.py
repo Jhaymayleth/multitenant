@@ -17,7 +17,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db, set_tenant_schema
-from app.menus.models import MenuProduct
+from app.menus.models import MenuCategory, MenuProduct
 from app.menus.schemas import ProductResponse
 from app.payments.schemas import ReceiptResponse
 from app.platform.models import Tenant
@@ -61,7 +61,16 @@ def get_public_site(slug: str, db: Session = Depends(get_db)):
 )
 def get_public_menu(slug: str, db: Session = Depends(get_db)):
     resolve_tenant_by_slug(slug, db)
-    stmt = select(MenuProduct).where(MenuProduct.is_active == True).order_by(MenuProduct.name.asc())
+    stmt = (
+        select(MenuProduct)
+        .join(MenuCategory, MenuProduct.category_id == MenuCategory.id)
+        .where(
+            MenuProduct.is_active.is_(True),
+            MenuProduct.is_published.is_(True),
+            MenuCategory.is_active.is_(True),
+        )
+        .order_by(MenuProduct.display_order.asc(), MenuProduct.name.asc())
+    )
     return db.execute(stmt).scalars().all()
 
 

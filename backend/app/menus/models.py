@@ -43,7 +43,9 @@ class MenuProduct(Base):
     description = Column(String(500), nullable=True)
     price_cents = Column(Integer, nullable=False, default=0)
     image_url = Column(Text, nullable=True)
+    display_order = Column(SmallInteger, nullable=False, default=0)
     is_active = Column(Boolean, nullable=False, default=True)
+    is_published = Column(Boolean, nullable=False, default=False)
     created_at = Column(DateTime(timezone=True), default=utc_now, nullable=False)
     updated_at = Column(DateTime(timezone=True), default=utc_now, onupdate=utc_now, nullable=False)
 
